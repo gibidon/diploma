@@ -1,0 +1,326 @@
+{
+  "users": [
+    {
+      "id": "001",
+      "login": "Igor",
+      "password": "123123",
+      "registered_at": "20-04-1999",
+      "role_id": 0
+    },
+    {
+      "id": "002",
+      "login": "Ivan",
+      "password": "123123",
+      "registered_at": "20-05-1999",
+      "role_id": 1
+    },
+    {
+      "id": "003",
+      "login": "Andrei",
+      "password": "123123",
+      "registered_at": "20-01-1999",
+      "role_id": 2
+    },
+    {
+      "id": "004",
+      "login": "Olga",
+      "password": "123123",
+      "registered_at": "24-04-1999",
+      "role_id": 2
+    },
+    {
+      "id": "005",
+      "login": "Dennis",
+      "password": "123123",
+      "registered_at": "24-04-1999",
+      "role_id": 2
+    },
+    {
+      "login": "Maria",
+      "password": "123123",
+      "registeredAt": "2047-08-06 10:17",
+      "role_id": 2,
+      "id": "OkcGhvz"
+    },
+    {
+      "login": "Maria123",
+      "password": "123123",
+      "registeredAt": "2039-12-10 16:29",
+      "role_id": 2,
+      "id": "lLMyM8s"
+    },
+    {
+      "login": "Dmitry2",
+      "password": "123123",
+      "registeredAt": "2044-08-19 07:34",
+      "role_id": 2,
+      "id": "HCHEGtr"
+    },
+    {
+      "login": "Maria2",
+      "password": "123123",
+      "registeredAt": "2062-01-02 12:31",
+      "role_id": 2,
+      "id": "K9jPukw"
+    },
+    {
+      "login": "Barak",
+      "password": "123123",
+      "registeredAt": "2047-11-05 04:27",
+      "role_id": 2,
+      "id": "NlbVKVX"
+    },
+    {
+      "login": "Igor1",
+      "password": "111111",
+      "registeredAt": "2045-02-12 19:56",
+      "role_id": 2,
+      "id": "yqiBzZv"
+    }
+  ],
+  "hotels": [
+    {
+      "id": "001",
+      "title": "Casa Del Ray",
+      "rating": "4",
+      "description": "lorem ipsum dolor",
+      "price": "12000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531834.jpg?k=a4da6f4c0c6ce6ae09012e8ca2271a913e661ee9cd1122ca88a1d15f9613f1f1&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033159.jpg?k=615feee72597567396d73430fd104e981aeb7d582f89ca494c688982a0ec909a&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033155.jpg?k=7d56bd7d5fddafc7de5fc62e418aa7788793d4920414dab10b167feb26644185&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033130.jpg?k=8b8cce0a9e97f5c06a619fab8827b1815cad4e39b1536558452e474f11fde242&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/482278539.jpg?k=faaad6b59a01dfe59f7dcd2762b372e77473c03b37f49d88f8e0d893f67bd6c9&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531843.jpg?k=674250299df168c4aca5cad031407a103d4ffab7159caf7c2e3e6a23c9c3a3ad&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "002",
+      "title": "Arcadia Resort & Spa",
+      "rating": "5",
+      "description": "lorem ipsum dolor sir",
+      "price": "30000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531834.jpg?k=a4da6f4c0c6ce6ae09012e8ca2271a913e661ee9cd1122ca88a1d15f9613f1f1&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033159.jpg?k=615feee72597567396d73430fd104e981aeb7d582f89ca494c688982a0ec909a&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033155.jpg?k=7d56bd7d5fddafc7de5fc62e418aa7788793d4920414dab10b167feb26644185&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033130.jpg?k=8b8cce0a9e97f5c06a619fab8827b1815cad4e39b1536558452e474f11fde242&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/482278539.jpg?k=faaad6b59a01dfe59f7dcd2762b372e77473c03b37f49d88f8e0d893f67bd6c9&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531843.jpg?k=674250299df168c4aca5cad031407a103d4ffab7159caf7c2e3e6a23c9c3a3ad&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "003",
+      "title": "Caesars Hotel",
+      "rating": "4",
+      "description": "lorem ipsum dolor",
+      "price": "14000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531834.jpg?k=a4da6f4c0c6ce6ae09012e8ca2271a913e661ee9cd1122ca88a1d15f9613f1f1&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033159.jpg?k=615feee72597567396d73430fd104e981aeb7d582f89ca494c688982a0ec909a&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033155.jpg?k=7d56bd7d5fddafc7de5fc62e418aa7788793d4920414dab10b167feb26644185&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033130.jpg?k=8b8cce0a9e97f5c06a619fab8827b1815cad4e39b1536558452e474f11fde242&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/482278539.jpg?k=faaad6b59a01dfe59f7dcd2762b372e77473c03b37f49d88f8e0d893f67bd6c9&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531843.jpg?k=674250299df168c4aca5cad031407a103d4ffab7159caf7c2e3e6a23c9c3a3ad&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "004",
+      "title": "Bounty Resort",
+      "rating": "3",
+      "description": "lorem ipsum dolor",
+      "price": "10000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531834.jpg?k=a4da6f4c0c6ce6ae09012e8ca2271a913e661ee9cd1122ca88a1d15f9613f1f1&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033159.jpg?k=615feee72597567396d73430fd104e981aeb7d582f89ca494c688982a0ec909a&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033155.jpg?k=7d56bd7d5fddafc7de5fc62e418aa7788793d4920414dab10b167feb26644185&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/493033130.jpg?k=8b8cce0a9e97f5c06a619fab8827b1815cad4e39b1536558452e474f11fde242&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/482278539.jpg?k=faaad6b59a01dfe59f7dcd2762b372e77473c03b37f49d88f8e0d893f67bd6c9&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/475531843.jpg?k=674250299df168c4aca5cad031407a103d4ffab7159caf7c2e3e6a23c9c3a3ad&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "005",
+      "title": "Marina Seaview Hotel",
+      "rating": "5",
+      "description": "lorem ipsum dolor",
+      "price": "32000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490719610.jpg?k=e55a016eb94714fc283dd0f65dbe0ab27b2ec2306eb55aa7bafec831dd273fdd&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490719451.jpg?k=7dfad363cd609773d66b1b770902c7aca2ef97a1cb22e53c8ae2dec8e90d4485&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/489445285.jpg?k=9ea41ee9e20729e02b61d91140099074e17dc43f39800f3e0c47ca26e2d621fe&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490719610.jpg?k=e55a016eb94714fc283dd0f65dbe0ab27b2ec2306eb55aa7bafec831dd273fdd&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490719415.jpg?k=b3d488393edbef26636f35b80da5df7339989ba4436f1160bfec4d3e40d5993b&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/489365833.jpg?k=8e2a3a83e59853ee912ff2e33e71c83784948d28c37f79d169d3a6caa9f5ed68&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "006",
+      "title": "Open Pool Hotel",
+      "rating": "3",
+      "description": "lorem ipsum dolor",
+      "price": "4000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/221559140.jpg?k=3c3fa6e4cccc0005b20e01bb9f4d6eaf3bb94b54e0e9bb2435cfbff94d1a4cfa&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/415403678.jpg?k=b0ad2cd9c033158f8107d746332cf544c7890f3b6b050ee99afd1abfbafb085a&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/415403680.jpg?k=b9803a42f2dfb7399d703e512a2b914c4afa24410b25c925a7ec1bdd5af087d9&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/269518071.jpg?k=31ccbe40538eb065dc7e4505403989c2f311b4711dc7f4a2240fc2edd0fc02e2&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/224031377.jpg?k=1325d9c54d00e7c748d5977b367b414d03d791ed5a040128f112bd80d663864f&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/224031361.jpg?k=4e349fa457023b9e9f88c4030387a6bd43909c9045cef885a1292226c4a6b9c3&o=&hp=1"
+      ],
+      "booked": "false"
+    },
+    {
+      "id": "007",
+      "title": "Golden Palace Resort & Spa",
+      "rating": "5",
+      "description": "lorem ipsum dolor",
+      "price": "33000",
+      "reviews": [],
+      "images": [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/478913736.jpg?k=b89987afac5ebfc05c145cb8cb6929173ac56f5b18cc7cb64a98177e8cc857b5&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/478907207.jpg?k=29f18c177bdf15b47f215dcb602760878f82725e4348b7605d890d37089b87a6&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/478907193.jpg?k=f52c2c6402d594ec1dc52ed6d81f31c3a37f98e3149019d69407255f99e877c5&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/476089200.jpg?k=da8148bfab1ef2a9c2a4d4f9c5f4d420cbb48fc9ba5482554471c98b3d534418&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/476089169.jpg?k=3efe6d9b6cae131fd143e428b03da4540d1432be1940e7ae684980b1a6a04496&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/476089194.jpg?k=dc50430e34f296111c1287db0477e1904c35261b1ab2582fe715d24d0fe94d80&o=&hp=1"
+      ],
+      "booked": "false"
+    }
+  ],
+  "reviews": [
+    {
+      "author_id": "001",
+      "hotel_id": "002",
+      "published_at": "2057-10-30 02:18",
+      "content": "good!",
+      "id": 4
+    },
+    {
+      "author_id": "001",
+      "hotel_id": "002",
+      "published_at": "2054-01-11 12:32",
+      "content": "lorem ipsum dolor\n",
+      "id": 6
+    }
+  ],
+  "sessions": [
+    {
+      "hash": "0.77096159571320854730913652019808068871498107910156",
+      "user": {
+        "id": "OkcGhvz",
+        "login": "Maria",
+        "password": "123123",
+        "registeredAt": "2047-08-06 10:17",
+        "roleId": 2
+      },
+      "id": 28
+    },
+    {
+      "hash": "0.04359676000275181095844345691148191690444946289063",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 29
+    },
+    {
+      "hash": "0.42055343410661349956569665664574131369590759277344",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 30
+    },
+    {
+      "hash": "0.50536035235171006263499293709173798561096191406250",
+      "id": 31
+    },
+    {
+      "hash": "0.00114233293817012082627115887589752674102783203125",
+      "user": {
+        "id": "OkcGhvz",
+        "login": "Maria",
+        "password": "123123",
+        "registeredAt": "2047-08-06 10:17",
+        "roleId": 2
+      },
+      "id": 32
+    },
+    {
+      "hash": "0.71311198832543953862739272153703495860099792480469",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 33
+    },
+    {
+      "hash": "0.21838397705835266293661334202624857425689697265625",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 34
+    },
+    {
+      "hash": "0.48290725811610490936232054082211107015609741210938",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 35
+    },
+    {
+      "hash": "0.67070478914252351643199290265329182147979736328125",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 36
+    },
+    {
+      "hash": "0.15965849828516587294302553345914930105209350585938",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 37
+    },
+    {
+      "hash": "0.80402909868242056212750412669265642762184143066406",
+      "user": {
+        "id": "001",
+        "login": "Igor",
+        "password": "123123",
+        "roleId": 0
+      },
+      "id": 38
+    }
+  ]
+}

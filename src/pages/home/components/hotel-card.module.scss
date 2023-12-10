@@ -1,0 +1,83 @@
+// *::before,
+// ::after {
+// 	box-sizing: border-box;
+// }
+
+.card {
+	// background-color: hsl(32, 97%, 74%);
+	// border: 2px hsl(0, 63%, 43%);
+	// border-radius: 1rem;
+	// padding: 1rem;
+	transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+
+	.bookButton {
+		display: block;
+		min-width: 160px;
+		// justify-content: center;
+		margin: 0 auto;
+		padding: 1em;
+		position: relative;
+		cursor: pointer;
+		outline: none;
+		border: none;
+		background-color: hsl(103, 13%, 89%);
+		font-weight: 400;
+		font-size: large;
+	}
+
+	.bookButton::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		border: 2px solid rgb(124, 134, 134);
+
+		transition:
+			top,
+			left,
+			right,
+			bottom,
+			100ms ease-in-out;
+
+		// content: '';
+		// position: absolute;
+		// left: 0;
+		// right: 0;
+		// bottom: 0;
+		// height: 5px;
+		// border-color: hsl(32, 62%, 50%);
+		// transition: transform 300ms ease-in-out;
+
+		// transform: scaleX(0);
+	}
+
+	.bookButton:hover::before,
+	.bookButton:focus::before {
+		// top: 4px;
+		top: calc(2px * -2);
+		left: calc(2px * -2);
+		right: calc(2px * -2);
+		bottom: calc(2px * -2);
+		z-index: 0;
+	}
+
+	// .bookButton:hover::before,
+	// .bookButton:focus::before {
+	// 	transform: scaleX(1);
+	// }
+
+	// .bookButton::after {
+	// 	content: 'after';
+	// 	position: absolute;
+	// 	right: 10px;
+	// }
+}
+
+.card:hover {
+	box-shadow:
+		rgba(0, 0, 0, 0.19) 0px 10px 20px,
+		rgba(64, 19, 122, 0.23) 0px 6px 6px;
+}

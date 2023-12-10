@@ -1,0 +1,20 @@
+.info {
+	color: white;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.loginIcon,
+.logoutIcon {
+	color: white;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.loginIcon,
+.logoutIcon:hover {
+	background-color: hsl(234, 70%, 33%);
+}
