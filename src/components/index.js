@@ -4,3 +4,5 @@ export * from './button/button';
 export * from './header/header';
 export * from './footer/footer';
 export * from './private-content/private-content';
+export * from './modal/modal';
+export * from './loader/loader';

@@ -1,10 +1,11 @@
 import { setHotelData } from './set-hotel-data';
+import { request } from '#utils';
 
-export const loadHotelAsync = (requestServer, hotelId) => (dispatch) => {
-	requestServer('fetchHotel', hotelId).then((hotelData) => {
-		if (hotelData.res) {
-			dispatch(setHotelData(hotelData.res));
+export const loadHotelAsync = (hotelId) => (dispatch) =>
+	request(`/hotel/${hotelId}`).then((hotelData) => {
+		if (hotelData.data) {
+			dispatch(setHotelData(hotelData.data));
 		}
+		// console.log('hotelData before sending: ', hotelData);
 		return hotelData;
 	});
-};

@@ -1,0 +1,33 @@
+.filterColumn {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	background-color: hsl(34, 90%, 61%);
+	border: 0.5px solid rgb(206, 206, 206);
+	border-radius: 10px;
+	/* min-width: 220px; */
+	flex-basis: 250px;
+	flex-shrink: 0.5;
+	padding: 0.5rem 1rem;
+	/* flex: 1; */
+	max-height: 400px;
+	/* position: sticky; */
+}
+
+.filterColumn > h1 {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.filterColumn > label {
+	font-size: 12px;
+}
+.filterColumn > input {
+	border: none;
+}
+
+@media screen and (max-width: 1068px) {
+	.filterColumn {
+		display: none;
+	}
+}

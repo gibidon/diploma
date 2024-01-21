@@ -1,10 +1,10 @@
 import { useLayoutEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from './actions';
-import { Authorization, Home, Hotel, Registration } from './pages';
-import { Container, Header, Footer } from './components';
-import { AdminPage } from './pages/admin-page/admin-page';
+import { setUser } from '#actions';
+import { Authorization, Home, Hotel, Registration } from '#pages';
+import { Container, Header, Footer, Modal } from '#components';
+import { AdminPage } from '#pages/admin-page/admin-page';
 import './App.css';
 
 export const App = () => {
@@ -27,24 +27,22 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<Container maxWidth={1168}>
-				{/* <div> */}
+			<Container maxWidth={1168} marginTop={'20px'}>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Authorization />} />
 					<Route path="/register" element={<Registration />} />
-					<Route path="/hotels/:id" element={<Hotel />} />
-					<Route path="/admin-page" element={<AdminPage />} />
+					<Route path="/hotel/:id" element={<Hotel />} />
+					<Route path="/hotel/create" element={<Hotel />} />
+					<Route path="/hotel/:id/edit" element={<Hotel />} />
+					<Route path="/admin" element={<AdminPage />} />
+					{/* <Route path="/userPage" element={<UserPage />} /> */}
 					<Route path="*" element={<div>404</div>} />
 				</Routes>
-				{/* </div> */}
 
-				{/* <Modal/> */}
-				{/* </div> */}
+				<Modal />
 			</Container>
 			<Footer />
 		</>
-
-		// <div className="App">
 	);
 };

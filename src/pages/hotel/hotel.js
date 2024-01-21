@@ -1,32 +1,92 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { loadHotelAsync } from '../../actions/load-hotel-async';
-import { useServerRequest } from '../../hooks';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { useParams, useMatch } from 'react-router-dom';
+import { loadHotelAsync, setHotelData, RESET_HOTEL_DATA } from '#actions';
+import { Link } from 'react-router-dom';
+import { ROLES } from '#constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectHotel } from '../../selectors';
+import { selectUserLogin, selectUserRole, selectHotel } from '#selectors';
+import { request } from '#utils';
+import { Slider, Reviews, HotelForm, HotelContent } from './components';
+import { PrivateContent, Loader } from '#components';
+import { useDownloadHotel, useFetch } from '#hooks';
+import styles from './hotel.module.css';
 
 export const Hotel = () => {
-	// const [hotel, setHotel] = useState();
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
+
 	const params = useParams();
-	const requestServer = useServerRequest();
 	const dispatch = useDispatch();
-	const hotel = useSelector(selectHotel);
+	const userLogin = useSelector(selectUserLogin);
+	const hotelData = useSelector(selectHotel);
+	console.log('hot: ', hotelData, typeof hotelData);
+
+	const isCreating = useMatch('/hotel/create');
+	const isEditing = useMatch(`/hotel/${params.id}/edit`);
+
+	// const { title, description, images, price, country, reviews } =useDownloadHotel(params.id);
+
+	useLayoutEffect(() => {
+		dispatch(RESET_HOTEL_DATA);
+	}, [dispatch, isCreating]);
 
 	useEffect(() => {
-		dispatch(loadHotelAsync(requestServer, params.id));
-	}, [dispatch, params.id, requestServer]);
+		if (isCreating) return;
 
-	return (
-		<div>
-			<h2>Post: </h2>
+		dispatch(loadHotelAsync(params.id)).then((hotelData) => {
+			setError(hotelData.error);
+			setIsLoading(false);
+		});
+	}, [dispatch, params.id, isCreating]);
+
+	const { title, description, images, price, country, reviews } = hotelData;
+
+	const book = async (userLogin, hotelId) => {
+		await request(`/book`, 'POST', { userLogin, hotelId });
+	};
+
+	if (isLoading) return <Loader />;
+
+	const SpecificHotelPage =
+		isEditing || isCreating ? (
+			<PrivateContent accessRoles={[ROLES.ADMIN]} serverError={error}>
+				<div>
+					<HotelForm hotelData={hotelData} />
+				</div>
+			</PrivateContent>
+		) : (
 			<div>
-				{hotel.id},{hotel.title}
-				{hotel.description}
-				<img
-					src="https://cf.bstatic.com/xdata/images/hotel/square600/121402222.webp?k=f7f266ab09f90ddea4464309eca14d79429afe4218ced6887cb52f82c42c03dc&o="
-					alt={hotel.title}
-				/>
+				<HotelContent hotelData={hotelData} />
 			</div>
-		</div>
-	);
+		); //TODO comments error upon creation
+
+	return error ? <div>error</div> : SpecificHotelPage;
+
+	// return isEditing ? (
+	// 	<div>loading,editing</div>
+	// ) : (
+	// 	<div className={styles.hotel}>
+	// 		<h1>{title} &#9733;</h1>
+	// 		<div className={styles.content}>
+	// 			<Slider images={images} />
+	// 			<div className={styles.description}>
+	// 				<span className={styles.description_country}>Country: {country}</span>
+	// 				{description}
+	// 				<span className={styles.description_price}>
+	// 					Price: {price} $ per night
+	// 				</span>
+
+	// 				<button
+	// 					className={styles.bookBtn}
+	// 					onClick={() => book(userLogin, params.id)}
+	// 				>
+	// 					Book now
+	// 				</button>
+	// 			</div>
+	// 		</div>
+	// 		<div>
+	// 			<Reviews reviews={reviews} hotelId={params.id} />
+	// 		</div>
+	// 	</div>
+	// );
 };

@@ -1,5 +1,5 @@
-import { ACTION_TYPE } from '../actions';
-import { ROLES } from '../constants';
+import { ACTION_TYPE } from '#actions';
+import { ROLES } from '#constants';
 
 const initialUserState = {
 	id: null,
@@ -9,6 +9,7 @@ const initialUserState = {
 };
 
 export const userReducer = (state = initialUserState, action) => {
+	// console.log('state in store: ', state);
 	switch (action.type) {
 		case ACTION_TYPE.SET_USER:
 			return {

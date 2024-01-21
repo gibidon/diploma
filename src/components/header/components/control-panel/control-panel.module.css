@@ -1,0 +1,49 @@
+.info {
+	color: white;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.loginIcon,
+.logoutIcon {
+	color: white;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+/* .loginIcon,
+.logoutIcon:hover {
+	background-color: hsl(234, 70%, 33%);
+} */
+
+.loginIcon {
+}
+
+.userName {
+	font-size: 22px;
+	color: rgb(238, 179, 51);
+}
+
+.highlight {
+	/* background-color: brown; */
+	position: relative;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: inherit;
+	cursor: pointer;
+}
+
+.highlight:hover {
+	background-color: rgb(12, 101, 173);
+	/* opacity: 0.8; */
+}
+
+.link {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+}

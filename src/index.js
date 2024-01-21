@@ -4,16 +4,20 @@ import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
+// import api from './api';
+// import { ApiContext } from './contexts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-console.log('berofe rendering the whole app...');
 root.render(
-	// <React.StrictMode>
-	<Provider store={store}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</Provider>,
-	// </React.StrictMode>,
+	<React.StrictMode>
+		<Provider store={store}>
+			{/* <ApiContext value={api}> */}
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+			{/* </ApiContext> */}
+		</Provider>
+		,
+	</React.StrictMode>,
 );

@@ -100,3 +100,15 @@ del {
 img {
 	max-width: 100%;
 }
+
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+input[type='text'] {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	margin: 0;
+}

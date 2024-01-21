@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Button, Input } from '../../components';
-import { setUser } from '../../actions';
+import { Button, Input } from '#components';
+import { useResetForm } from '#hooks';
+import { setUser } from '#actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { server } from '../../bff';
-import { useState } from 'react';
-import { selectUserRole } from '../../selectors';
+import { selectUserRole } from '#selectors';
 import { Link, Navigate } from 'react-router-dom';
-import styles from './authorization.module.scss';
-import { ROLES } from '../../constants/roles';
+import { ROLES } from '#constants/roles';
+import { request } from '#utils';
+import styles from './authorization.module.css';
 
 const authFormSchema = yup.object().shape({
 	login: yup
@@ -30,9 +31,9 @@ const authFormSchema = yup.object().shape({
 });
 
 export const Authorization = () => {
-	const dispatch = useDispatch();
-	const roleId = useSelector(selectUserRole);
 	const [serverError, setServerError] = useState(null);
+	const roleId = useSelector(selectUserRole);
+	const dispatch = useDispatch();
 
 	const {
 		register,
@@ -44,14 +45,16 @@ export const Authorization = () => {
 		resolver: yupResolver(authFormSchema),
 	});
 
+	useResetForm(reset);
+
 	const onSubmit = ({ login, password }) => {
-		server.authorize(login, password).then(({ error, res }) => {
+		request('/login', 'POST', { login, password }).then(({ error, user }) => {
 			if (error) {
 				setServerError(`Ошибка запроса, ${error}`);
 				return;
 			}
-			dispatch(setUser(res));
-			sessionStorage.setItem('userData', JSON.stringify(res));
+			dispatch(setUser(user));
+			sessionStorage.setItem('userData', JSON.stringify(user));
 		});
 	};
 
@@ -99,7 +102,9 @@ export const Authorization = () => {
 				</form>
 				<div>{errorMessage}</div>
 				<div>
-					<Link to="/register">No account yet? Go to register page</Link>
+					<Link to="/register">
+						Don't have account yet? Go to register page
+					</Link>
 				</div>
 				<div>
 					<a href="/register">Go with reload with a tag</a>

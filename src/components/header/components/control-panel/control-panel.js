@@ -1,56 +1,78 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-// import { ROLES } from '../../../../constants/roles';
-import { ROLES } from '#constants/roles';
-// import {
-// 	selectUserRole,
-// 	selectUserLogin,
-// 	selectUserSession,
-// } from '../../../../selectors';
+import { ROLES } from '#constants';
 import { selectUserRole, selectUserLogin, selectUserSession } from '#selectors';
 import { logout } from '#actions';
-import { Button } from '../../../button/button';
+import { checkAccess } from '#utils';
 import { FaUser } from 'react-icons/fa';
+import { CiEdit } from 'react-icons/ci';
 import { IoLogOutOutline } from 'react-icons/io5';
-import styles from './control-panel.module.scss';
+import { TbPlayerSkipBackFilled } from 'react-icons/tb';
+import { BsSuitcase2 } from 'react-icons/bs';
+import { FaUsers } from 'react-icons/fa6';
+import styles from './control-panel.module.css';
 
 export const ControlPanel = () => {
 	const roleId = useSelector(selectUserRole);
 	const login = useSelector(selectUserLogin);
-	const session = useSelector(selectUserSession);
+	// const session = useSelector(selectUserSession);
 	const dispatch = useDispatch();
-	// const navigate = useNavigate();
-
-	console.log('rendering control panel,data: ', login, roleId, session);
+	const navigate = useNavigate();
 
 	const onLogout = () => {
-		dispatch(logout(session));
+		dispatch(logout());
 		sessionStorage.removeItem('userData');
 	};
 
-	// const isAdmin = checkAccess([ROLES.ADMIN],roleId)
+	const isAdmin = checkAccess([ROLES.ADMIN], roleId);
 
 	return (
 		<div className={styles.info}>
 			{roleId === ROLES.GUEST ? (
-				<Link to="/login">
-					{/* <Button> */}
-					<FaUser
-						className={styles.loginIcon}
-						// style={{ color: 'white', fontSize: '24px' }}
-					/>
-					{/* </Button> */}
-				</Link>
+				<span className={styles.highlight}>
+					<Link to="/login" className={styles.link}>
+						<FaUser
+							className={styles.loginIcon}
+							// style={{ color: 'white', fontSize: '24px' }}
+						/>
+					</Link>
+				</span>
 			) : (
 				<>
-					<div>Hello, {login}</div>
-					{/* <button onClick={onLogout}> */}
+					<div className={styles.userName}>Hello, {login}</div>
+
 					<IoLogOutOutline
 						className={styles.logoutIcon}
 						onClick={onLogout}
 						style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
 					/>
-					{/* </button> */}
+				</>
+			)}
+			<TbPlayerSkipBackFilled
+				style={{ cursor: 'pointer' }}
+				onClick={() => {
+					navigate(-1);
+				}}
+			/>
+			{roleId !== ROLES.GUEST && (
+				<Link to="/userPage">
+					<BsSuitcase2
+						style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
+					/>
+				</Link>
+			)}
+			{isAdmin && (
+				<>
+					<Link to="/hotel/create">
+						<CiEdit
+							style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
+						/>
+					</Link>
+					<Link to="/users">
+						<FaUsers
+							style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
+						/>
+					</Link>
 				</>
 			)}
 		</div>

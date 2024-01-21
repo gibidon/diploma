@@ -1,13 +1,17 @@
 {
 	"name": "hotel-booking",
+	"proxy": "http://localhost:3001",
 	"imports": {
 		"#*": "./src/*",
-		"#components": "./src/components/*",
-		"#pages": "./src/pages/*",
-		"#constants": "./src/constants/*",
+		"#components": "./src/components",
+		"#pages": "./src/pages",
+		"#constants": "./src/constants",
+		"#contexts": "./src/contexts",
+		"#hooks": "./src/hooks",
 		"#selectors": "./src/selectors",
 		"#reducers": "./src/reducers/*",
-		"#styles": "./src/App.css"
+		"#styles": "./src/App.css",
+		"#utils": "./src/utils"
 	},
 	"version": "0.1.0",
 	"private": true,

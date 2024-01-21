@@ -1,37 +1,52 @@
-import { useState, useEffect } from 'react';
-import { HotelCard } from './components/hotel-card';
-import { Container } from '../../components';
-import { fetchHotels } from '../../bff/operations';
-import { useDebouncedFunction } from '../../hooks';
-import styles from './home.module.scss';
+import { useState } from 'react';
+import { useDebouncedFunction, useDownloadHotels } from '#hooks';
+import { HotelCard, FilterColumn } from './components';
+import { PAGINATION_LIMIT } from '#constants';
+import styles from './home.module.css';
 
 export const Home = () => {
-	//downloaded hotels
-	const [hotels, setHotels] = useState([]);
+	const [shouldSearch, setShouldSearch] = useState(false);
 
-	useEffect(() => {
-		const loadHotels = () => {
-			fetchHotels().then(({ hotels }) => {
-				setHotels(hotels);
-			});
-		};
+	const [searchParams, setSearchParams] = useState({
+		searchPhrase: '',
+		page: 1,
+		PAGINATION_LIMIT,
+		country: '',
+		price: null,
+	});
 
-		loadHotels();
-	}, []);
-	// const debouncedSearch = useDebouncedFunction()
+	console.log('sp: ', searchParams);
+	//TODO with useApi hook and context
+
+	// const { hotels, lastPage } = useDownloadHotels(
+	// 	searchPhrase,
+	// 	page,
+	// 	PAGINATION_LIMIT,
+	// );
+	const { hotels, lastPage } = useDownloadHotels(
+		searchParams.searchPhrase,
+		searchParams.page,
+		searchParams.PAGINATION_LIMIT,
+		searchParams.country,
+		searchParams.price,
+	);
+
+	console.log('hh: ', hotels);
+	const debouncedSearch = useDebouncedFunction(setSearchParams, 700);
+
+	const onChange = (e) => {
+		debouncedSearch({ ...searchParams, [e.target.name]: e.target.value });
+		// debouncedSearch(!shouldSearch);
+	};
+
 	return (
-		<Container maxWidth={1168}>
-			<div className={styles.main}>
-				<div className={styles.filterBar}>
-					<div>filter by name</div>
-					<div>filter by destination</div>
-				</div>
-				<div className={styles.content}>
-					{hotels.map(({ id, title, images }, index) => (
-						<HotelCard key={index} id={id} title={title} images={images} />
-					))}
-				</div>
+		<div className={styles.home}>
+			<FilterColumn onChange={onChange} />
+			<div className={styles.content}>
+				{hotels.map(({ title, id, images }) => (
+					<HotelCard key={id} id={id} title={title} images={images} />
+				))}
 			</div>
-		</Container>
+		</div>
 	);
 };

@@ -20,6 +20,14 @@ export const HeaderSearch = () => {
 		},
 	]);
 
+	const handleOption = (e, name, operation) => {
+		e.stopPropagation();
+		setOptions((prev) => ({
+			...prev,
+			[name]: operation === 'increase' ? options[name] + 1 : options[name] - 1,
+		}));
+	};
+
 	return (
 		<div className={styles.headerSearch}>
 			<div className={styles.headerSearchItem}>
@@ -51,34 +59,78 @@ export const HeaderSearch = () => {
 			</div>
 			<div className={styles.headerSearchItem}>
 				<BsPersonStanding />
-				<span className={styles.headerSearchText}>
+				<span
+					onClick={() => setOpenOptions(!openOptions)}
+					className={styles.headerSearchText}
+				>
 					{`${options.adult} adult | ${options.children} children | ${options.room} room`}
-					<div className={styles.options}>
-						<div className={styles.optionItem}>
-							<span className={styles.optionText}>Adult</span>
-							<div className={styles.optionCounter}>
-								<button className={styles.optionCounterButton}>-</button>
-								<span className={styles.optionCounterNumber}>1</span>
-								<button className={styles.optionCounterButton}>+</button>
+					{openOptions && (
+						<div className={styles.options}>
+							<div className={styles.optionItem}>
+								<span className={styles.optionText}>Adult</span>
+								<div className={styles.optionCounter}>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'adult', 'decrease')} //component TODO
+										disabled={options.adult <= 1} //useClickOutside
+									>
+										-
+									</button>
+									<span className={styles.optionCounterNumber}>
+										{options.adult}
+									</span>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'adult', 'increase')}
+									>
+										+
+									</button>
+								</div>
+							</div>
+							<div className={styles.optionItem}>
+								<span className={styles.optionText}>Children</span>
+								<div className={styles.optionCounter}>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'children', 'decrease')}
+										disabled={options.children <= 0}
+									>
+										-
+									</button>
+									<span className={styles.optionCounterNumber}>
+										{options.children}
+									</span>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'children', 'increase')}
+									>
+										+
+									</button>
+								</div>
+							</div>
+							<div className={styles.optionItem}>
+								<span className={styles.optionText}>Room</span>
+								<div className={styles.optionCounter}>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'room', 'decrease')} //TODO component
+										disabled={options.room <= 1}
+									>
+										-
+									</button>
+									<span className={styles.optionCounterNumber}>
+										{options.room}
+									</span>
+									<button
+										className={styles.optionCounterButton}
+										onClick={(e) => handleOption(e, 'room', 'increase')}
+									>
+										+
+									</button>
+								</div>
 							</div>
 						</div>
-						<div className={styles.optionItem}>
-							<span className={styles.optionText}>Children</span>
-							<div className={styles.optionCounter}>
-								<button className={styles.optionCounterButton}>-</button>
-								<span className={styles.optionCounterNumber}>0</span>
-								<button className={styles.optionCounterButton}>+</button>
-							</div>
-						</div>
-						<div className={styles.optionItem}>
-							<span className={styles.optionText}>Room</span>
-							<div className={styles.optionCounter}>
-								<button className={styles.optionCounterButton}>-</button>
-								<span className={styles.optionCounterNumber}>1</span>
-								<button className={styles.optionCounterButton}>+</button>
-							</div>
-						</div>
-					</div>
+					)}
 				</span>
 			</div>
 			<div className={styles.headerSearchItem}>

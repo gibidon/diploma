@@ -1,0 +1,29 @@
+.input {
+	outline: none;
+	user-select: none;
+	border-width: 1px;
+	border-radius: 5px;
+	font-family: inherit;
+	padding: 8px;
+	transition:
+		border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+.input:invalid,
+.input:valid {
+	padding-right: 2.25rem;
+
+	background-repeat: no-repeat;
+	background-position: right 0.5625rem center;
+	background-size: 1.125rem 1.125rem;
+}
+
+.input:invalid:focus {
+	border-color: #dc3545;
+	box-shadow: 0 0 0 0.25rem rgba(70, 212, 248, 0.25);
+}
+.input:valid:focus {
+	border-color: #6bc7eb;
+	box-shadow: 0 0 0 0.25rem rgba(82, 183, 241, 0.25);
+}

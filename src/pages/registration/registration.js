@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ROLES } from '../../constants/roles';
+import { ROLES } from '#constants/roles';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useFetch, useResetForm } from '#hooks';
 import * as yup from 'yup';
-import { selectUserRole } from '../../selectors';
-import { Button, Container, Input } from '../../components';
-import { setUser } from '../../actions';
-import { Navigate } from 'react-router-dom';
-import { server } from '../../bff';
+import { selectUserRole } from '#selectors';
+import { Button, Container, Input } from '#components';
+import { setUser } from '#actions';
+import { request } from '#utils';
 import styles from './registration.module.scss';
 
 const regFormSchema = yup.object().shape({
@@ -30,7 +31,7 @@ const regFormSchema = yup.object().shape({
 	passcheck: yup
 		.string()
 		.required('Заполните повтор пароля')
-		.oneOf([yup.ref('password'), null], 'Повтор пароля не совпадает'),
+		.oneOf([yup.ref('password'), null], 'Пароли не совпадают'),
 });
 
 export const Registration = () => {
@@ -50,20 +51,22 @@ export const Registration = () => {
 	const dispatch = useDispatch();
 	const [serverError, setServerError] = useState(null);
 	const roleId = useSelector(selectUserRole);
+	const navigate = useNavigate();
 
-	// useResetForm(reset);
+	useResetForm(reset);
+
 	const onSubmit = ({ login, password }) => {
-		server.register(login, password).then(({ error, res }) => {
-			if (error) {
-				setServerError(`Ошибка запроса, ${error}`);
-				return;
-			}
-
-			console.log(res);
-
-			dispatch(setUser(res));
-			sessionStorage.setItem('userData', JSON.stringify(res));
-		});
+		request('/register', 'POST', { login, password }).then(
+			({ error, user }) => {
+				if (error) {
+					setServerError(`Ошибка запроса, ${error}`);
+					return;
+				}
+				dispatch(setUser(user));
+				sessionStorage.setItem('userData', JSON.stringify(user));
+				// navigate('/');
+			},
+		);
 	};
 
 	const formError =
@@ -73,9 +76,9 @@ export const Registration = () => {
 
 	const errorMessage = formError || serverError;
 
-	if (roleId !== ROLES.GUEST) {
-		return <Navigate to="/" />;
-	}
+	// if (roleId !== ROLES.GUEST) {
+	// 	return <Navigate to="/" />;
+	// }
 
 	return (
 		<>

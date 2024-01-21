@@ -1,0 +1,11 @@
+.review {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.3rem;
+	border: 1px solid lightgray;
+	border-radius: 6px;
+}
+
+.review:hover {
+	background-color: lightgray;
+}
