@@ -6,3 +6,5 @@ export * from './footer/footer';
 export * from './private-content/private-content';
 export * from './modal/modal';
 export * from './loader/loader';
+export * from './dropdown/dropdown';
+export * from './smart-button/smart-button';

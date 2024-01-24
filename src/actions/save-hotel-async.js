@@ -7,7 +7,7 @@ export const saveHotelAsync = (id, newHotelData) => (dispatch) => {
 		: request('/hotels/create', 'POST', newHotelData);
 
 	return saveRequest.then((updatedHotel) => {
-		dispatch(setHotelData(updatedHotel));
+		dispatch(setHotelData(updatedHotel.data));
 
 		return updatedHotel.data;
 	});

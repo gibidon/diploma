@@ -8,7 +8,7 @@ import { setUser } from '#actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserRole } from '#selectors';
 import { Link, Navigate } from 'react-router-dom';
-import { ROLES } from '#constants/roles';
+import { ROLES } from '#constants';
 import { request } from '#utils';
 import styles from './authorization.module.css';
 

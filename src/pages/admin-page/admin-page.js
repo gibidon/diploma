@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { PrivateContent } from '../../components';
-// import { useServerRequest } from '../../hooks';
+import { PrivateContent } from '#components';
 import { useSelector } from 'react-redux';
-import { ROLES } from '../../constants/roles';
-import { selectUserRole } from '../../selectors';
-import { checkAccess } from '../../utils/check-access';
+import { ROLES } from '#constants';
+import { selectUserRole } from '#selectors';
+import { checkAccess, request } from '#utils';
 import styles from './admin-page.module.css';
 
 export const AdminPage = () => {
@@ -18,12 +17,12 @@ export const AdminPage = () => {
 			return;
 		}
 
-		// requestServer('fetchHotels').then(({ hotels }) => {
-		setHotels(hotels);
-	});
-	// }, [requestServer, userRole]);
+		request('/hotels').then(({ hotels }) => {
+			setHotels(hotels);
+		});
+	}, []);
 
-	console.log(hotels);
+	console.log('hotels', hotels);
 
 	return (
 		<PrivateContent accessRoles={[ROLES.ADMIN]}>

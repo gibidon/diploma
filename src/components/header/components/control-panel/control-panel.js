@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROLES } from '#constants';
-import { selectUserRole, selectUserLogin, selectUserSession } from '#selectors';
+import { selectUserRole, selectUserLogin, selectUserId } from '#selectors';
 import { logout } from '#actions';
 import { checkAccess } from '#utils';
 import { FaUser } from 'react-icons/fa';
@@ -15,7 +15,7 @@ import styles from './control-panel.module.css';
 export const ControlPanel = () => {
 	const roleId = useSelector(selectUserRole);
 	const login = useSelector(selectUserLogin);
-	// const session = useSelector(selectUserSession);
+	const userId = useSelector(selectUserId);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ export const ControlPanel = () => {
 				}}
 			/>
 			{roleId !== ROLES.GUEST && (
-				<Link to="/userPage">
+				<Link to={`/user/${userId}`}>
 					<BsSuitcase2
 						style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
 					/>

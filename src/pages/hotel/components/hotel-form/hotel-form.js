@@ -1,9 +1,10 @@
 import { useState, useRef, useLayoutEffect } from 'react';
-import { saveHotelAsync } from '#actions';
+import { saveHotelAsync, removeHotelAsync } from '#actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Input } from '#components';
 import { FiSave } from 'react-icons/fi';
+import { MdDeleteOutline } from 'react-icons/md';
 import styles from './hotel-form.module.css';
 // import { Icon, Input } from '../../../../components';
 
@@ -11,16 +12,20 @@ import styles from './hotel-form.module.css';
 // import { savePostAsync } from '../../../../actions';
 import { sanitizeContent } from '#utils';
 
+const emptyFormData = {
+	title: '',
+	description: '',
+	price: null,
+	country: '',
+	rating: '',
+	images: [],
+};
+
 export const HotelForm = ({
 	hotelData: { id, title, images, description, price, country, rating },
 }) => {
-	const contentRef = useRef(null);
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	// const [imageUrlValue, setImageUrlValue] = useState(images[0]);
-	// const [titleValue, setTitleValue] = useState(title);
 
 	const [formState, setFormState] = useState({
 		title,
@@ -32,15 +37,23 @@ export const HotelForm = ({
 	});
 
 	console.log('formState: ', formState);
-	// useLayoutEffect(() => {
-	// 	setImageUrlValue(imageUrl);
-	// 	setTitleValue(title);
-	// }, [imageUrl, title]);
+
+	//if we come from hotel-page to url /hotel/edit,form data is taken from hotel. Otherwise we clean the form in useLayoutEffect:
+	useLayoutEffect(() => {
+		if (!id) setFormState(emptyFormData);
+	}, [id]);
 
 	const onSave = () => {
 		// const newContent = sanitizeContent(contentRef.current.innerHTML);
 		dispatch(saveHotelAsync(id, formState)).then(({ id }) => {
-			navigate(`/hotel/${id}`);
+			// navigate(`/hotel/${id}`);
+			navigate('/');
+		});
+	};
+
+	const onDelete = () => {
+		dispatch(removeHotelAsync(id)).then(() => {
+			navigate('/');
 		});
 	};
 
@@ -48,7 +61,8 @@ export const HotelForm = ({
 		setFormState({ ...formState, [target.name]: target.value });
 
 	return (
-		<form className={styles.form} onSubmit={onSave}>
+		<form className={styles.form}>
+			<h1>Please fill out the form:</h1>
 			<div>
 				<Input
 					name="title"
@@ -92,20 +106,13 @@ export const HotelForm = ({
 				/>
 			</div>
 
-			<button type="submit" className={styles.saveBtn}>
-				<FiSave
-					size="21px"
-					// className={styles.saveBtn}
-					margin="0 10px 0 0"
-					onClick={onSave}
-				/>
+			<button className={styles.saveBtn}>
+				<FiSave size="21px" margin="0 10px 0 0" onClick={onSave} />
 			</button>
-			{/* <div
-				className="post-text"
-				ref={contentRef}
-				contentEditable={true}
-				suppressContentEditableWarning={true}
-			></div> */}
+
+			<button className={styles.deleteBtn}>
+				<MdDeleteOutline size="21px" margin="0 10px 0 0" onClick={onDelete} />
+			</button>
 		</form>
 	);
 };

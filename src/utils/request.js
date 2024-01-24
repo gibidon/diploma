@@ -1,5 +1,5 @@
 export function request(url, method, data) {
-	console.log('data in request: ', data);
+	console.log('data in request: ', url, method, data);
 
 	return fetch(url, {
 		headers: { 'content-type': 'application/json' },

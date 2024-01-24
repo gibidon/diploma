@@ -4,7 +4,8 @@
 	padding: 1rem;
 }
 
-.saveBtn {
+.saveBtn,
+.deleteBtn {
 	max-width: 80px;
 	font-family: inherit;
 	appearance: none;
@@ -17,10 +18,16 @@
 	cursor: pointer;
 }
 
+.deleteBtn {
+	background: rgb(216, 64, 64);
+}
 .saveBtn:hover {
 	background: #1d49aa;
 }
 
+.deleteBtn:hover {
+	background: rgb(136, 57, 57);
+}
 .saveBtn:focus {
 	outline: none;
 	box-shadow: 0 0 0 4px #cbd6ee;

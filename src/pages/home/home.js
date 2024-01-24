@@ -5,7 +5,7 @@ import { PAGINATION_LIMIT } from '#constants';
 import styles from './home.module.css';
 
 export const Home = () => {
-	const [shouldSearch, setShouldSearch] = useState(false);
+	// const [shouldSearch, setShouldSearch] = useState(false);
 
 	const [searchParams, setSearchParams] = useState({
 		searchPhrase: '',
@@ -15,7 +15,7 @@ export const Home = () => {
 		price: null,
 	});
 
-	console.log('sp: ', searchParams);
+	// console.log('sp: ', searchParams);
 	//TODO with useApi hook and context
 
 	// const { hotels, lastPage } = useDownloadHotels(
@@ -31,7 +31,8 @@ export const Home = () => {
 		searchParams.price,
 	);
 
-	console.log('hh: ', hotels);
+	console.log('hotels on main: ', hotels);
+
 	const debouncedSearch = useDebouncedFunction(setSearchParams, 700);
 
 	const onChange = (e) => {
@@ -43,8 +44,14 @@ export const Home = () => {
 		<div className={styles.home}>
 			<FilterColumn onChange={onChange} />
 			<div className={styles.content}>
-				{hotels.map(({ title, id, images }) => (
-					<HotelCard key={id} id={id} title={title} images={images} />
+				{hotels.map(({ title, id, images, price }) => (
+					<HotelCard
+						key={id}
+						id={id}
+						title={title}
+						images={images}
+						price={price}
+					/>
 				))}
 			</div>
 		</div>

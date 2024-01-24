@@ -8,7 +8,6 @@ import { selectUserLogin, selectUserRole, selectHotel } from '#selectors';
 import { request } from '#utils';
 import { Slider, Reviews, HotelForm, HotelContent } from './components';
 import { PrivateContent, Loader } from '#components';
-import { useDownloadHotel, useFetch } from '#hooks';
 import styles from './hotel.module.css';
 
 export const Hotel = () => {
@@ -17,29 +16,29 @@ export const Hotel = () => {
 
 	const params = useParams();
 	const dispatch = useDispatch();
-	const userLogin = useSelector(selectUserLogin);
+	// const userLogin = useSelector(selectUserLogin);
 	const hotelData = useSelector(selectHotel);
-	console.log('hot: ', hotelData, typeof hotelData);
+
+	// console.log('hot: ', hotelData, typeof hotelData);
 
 	const isCreating = useMatch('/hotel/create');
 	const isEditing = useMatch(`/hotel/${params.id}/edit`);
-
-	// const { title, description, images, price, country, reviews } =useDownloadHotel(params.id);
 
 	useLayoutEffect(() => {
 		dispatch(RESET_HOTEL_DATA);
 	}, [dispatch, isCreating]);
 
 	useEffect(() => {
-		if (isCreating) return;
+		if (isCreating) {
+			setIsLoading(false);
+			return;
+		}
 
 		dispatch(loadHotelAsync(params.id)).then((hotelData) => {
 			setError(hotelData.error);
 			setIsLoading(false);
 		});
 	}, [dispatch, params.id, isCreating]);
-
-	const { title, description, images, price, country, reviews } = hotelData;
 
 	const book = async (userLogin, hotelId) => {
 		await request(`/book`, 'POST', { userLogin, hotelId });
@@ -50,15 +49,12 @@ export const Hotel = () => {
 	const SpecificHotelPage =
 		isEditing || isCreating ? (
 			<PrivateContent accessRoles={[ROLES.ADMIN]} serverError={error}>
-				<div>
-					<HotelForm hotelData={hotelData} />
-				</div>
+				<HotelForm hotelData={hotelData} />
 			</PrivateContent>
 		) : (
-			<div>
-				<HotelContent hotelData={hotelData} />
-			</div>
-		); //TODO comments error upon creation
+			<HotelContent hotelData={hotelData} />
+		);
+	//TODO comments error upon creation
 
 	return error ? <div>error</div> : SpecificHotelPage;
 

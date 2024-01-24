@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '#actions';
-import { Authorization, Home, Hotel, Registration } from '#pages';
+import { Authorization, Home, Hotel, Registration, UserPage } from '#pages';
 import { Container, Header, Footer, Modal } from '#components';
 import { AdminPage } from '#pages/admin-page/admin-page';
 import './App.css';
@@ -36,7 +36,7 @@ export const App = () => {
 					<Route path="/hotel/create" element={<Hotel />} />
 					<Route path="/hotel/:id/edit" element={<Hotel />} />
 					<Route path="/admin" element={<AdminPage />} />
-					{/* <Route path="/userPage" element={<UserPage />} /> */}
+					<Route path="/user/:id" element={<UserPage />} />
 					<Route path="*" element={<div>404</div>} />
 				</Routes>
 

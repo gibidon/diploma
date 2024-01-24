@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react';
 
 export const useFetch = (url, options = {}) => {
-	console.log('url in useFetch,opts: ', url, options);
-
-	const [data, setData] = useState({});
-	// const [error, setError] = useState(null);
+	// let [done, setDone] = useState(false);
+	let [data, setData] = useState([]);
+	let [error, setError] = useState(null);
 
 	useEffect(() => {
 		fetch(url, options)
 			.then((response) => response.json())
-			.then(({ data }) => {
-				console.log('de', data);
-				setData(data);
-			})
-			.catch((e) => {
-				// setError(e);
-				console.log(e);
-			});
-	}, [url, options]);
+			.then((data) => setData(data))
+			.catch((e) => setError(e));
+		// .finally(() => setDone(true));
+	}, []);
 
-	// return { data, error };
+	// return { done, data, error };
 	return { data };
 };

@@ -11,3 +11,4 @@ export * from './add-review';
 export * from './load-hotel-async';
 export * from './reset-hotel-data';
 export * from './save-hotel-async';
+export * from './remove-hotel-async';

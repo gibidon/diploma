@@ -31,9 +31,9 @@ h1 {
 
 .bookBtn {
 	display: block;
-	width: 80%;
-	padding: 0.5rem;
-	font-size: 26px;
+	max-width: 150px;
+	padding: 0.2rem;
+	font-size: 22px;
 	background-color: #0071c2;
 	color: white;
 	cursor: pointer;
@@ -41,4 +41,8 @@ h1 {
 
 .bookBtn:hover {
 	background-color: #00487a;
+}
+
+.rating {
+	color: rgb(253, 219, 27);
 }
