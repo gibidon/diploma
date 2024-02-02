@@ -2,12 +2,36 @@
 	border: 1px solid lightgray;
 	border-radius: 10px;
 	padding: 0.5rem 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.2rem;
+	line-height: 1.5rem;
+	margin-bottom: 1rem;
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* gap: 0.2rem; */
 	/* background-color: rgb(238, 238, 238); */
 }
 
 .template:hover {
 	background-color: aliceblue;
+}
+
+input {
+	border: none;
+}
+
+.removeBtn,
+.updateBtn {
+	padding: 0.2rem 0.4rem;
+	font-size: 18px;
+	font-weight: 500;
+	color: white;
+	margin-right: 1rem;
+	border-radius: 6px;
+}
+
+.removeBtn {
+	background-color: rgb(245, 146, 66);
+}
+
+.updateBtn {
+	background-color: rgb(62, 150, 11);
 }

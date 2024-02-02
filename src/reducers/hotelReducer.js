@@ -16,6 +16,9 @@ export const hotelReducer = (state = initialHotelState, action) => {
 		case ACTION_TYPE.RESET_HOTEL_DATA: {
 			return initialHotelState;
 		}
+		case ACTION_TYPE.ADD_REVIEW:
+			return { ...state, reviews: [...state.reviews, action.payload] };
+
 		default:
 			return state;
 	}

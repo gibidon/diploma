@@ -10,14 +10,12 @@ export const BookingForm = ({ submitForm, cancelForm }) => {
 		guestQuantity: null,
 	});
 
-	console.log('formState: ', formState);
-
 	const onChange = ({ target }) =>
 		setFormState({ ...formState, [target.name]: target.value });
 
 	return (
 		<form className={styles.form} onSubmit={(e) => e.stopPropagation()}>
-			<h1 className={styles.title}>Please fill out the details of the trip:</h1>
+			<h1 className={styles.title}>Пожалуйста заполните детали поездки:</h1>
 			<div>
 				<Input
 					name="dateStart"

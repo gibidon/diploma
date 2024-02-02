@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
 export const useDebouncedFunction = (func, delay) => {
-	const ref = useRef(null);
+	const timeout = useRef(null);
 
 	return (...args) => {
-		clearTimeout(ref.current);
-		ref.current = setTimeout(() => func(...args), delay);
+		clearTimeout(timeout.current);
+		timeout.current = setTimeout(() => func(...args), delay);
 	};
 };

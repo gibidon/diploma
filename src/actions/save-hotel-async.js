@@ -2,6 +2,7 @@ import { setHotelData } from './set-hotel-data';
 import { request } from '#utils';
 
 export const saveHotelAsync = (id, newHotelData) => (dispatch) => {
+	console.log(id, newHotelData);
 	const saveRequest = id
 		? request(`/hotels/${id}`, 'PATCH', newHotelData)
 		: request('/hotels/create', 'POST', newHotelData);

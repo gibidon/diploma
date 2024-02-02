@@ -1,20 +1,20 @@
 import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Slider } from '../slider/Slider';
-import { Reviews } from '../reviews/Reviews';
-import { PrivateContent } from '#components';
-import { BookingForm } from '../booking-form/booking-form';
 import { selectUserRole, selectUserId } from '#selectors';
 import { ROLES } from '#constants';
+import { PrivateContent } from '#components';
+import { Slider } from '../slider/Slider';
+import { Reviews } from '../reviews/Reviews';
+import { BookingForm } from '../booking-form/booking-form';
 import { CiEdit } from 'react-icons/ci';
 import { request } from '#utils';
 import styles from './hotel-content.module.css';
 
 export const HotelContent = ({ hotelData }) => {
+	console.log('hotelData in hotelContent: ', hotelData);
 	const [showBookingForm, setShowBookingForm] = useState(false);
 	const formRef = useRef(null);
-	// console.log('hdd:', hotelData);
 
 	const {
 		id: hotelId,
@@ -27,14 +27,14 @@ export const HotelContent = ({ hotelData }) => {
 		rating,
 	} = hotelData;
 
+	console.log('reviews in hotelContent: ', reviews);
+
 	const userId = useSelector(selectUserId);
 	const userRole = useSelector(selectUserRole);
 	const isLogged = userRole !== ROLES.GUEST;
 	const isAdmin = userRole === ROLES.ADMIN;
 
 	const submitForm = async (formData) => {
-		console.log('sumbitting form with fromData: ', formData);
-
 		await request(`/users/${userId}/reservations`, 'POST', {
 			...formData,
 			['user']: userId,
@@ -45,22 +45,29 @@ export const HotelContent = ({ hotelData }) => {
 	};
 
 	return (
-		<div className={styles.contentPage}>
-			<h1>
-				{title}
-				{[...Array(Number(rating))].map((star, index) => (
-					<span key={index} className={styles.rating}>
-						&#9733;
+		<>
+			<div className={styles.header}>
+				<div className={styles.leftAligned}>
+					<h1>{title}</h1>
+					<span className={styles.stars}>
+						{[...Array(Number(rating))].map((star, index) => (
+							<span key={index} className={styles.rating}>
+								&#9733;
+							</span>
+						))}
 					</span>
-				))}
-				{isAdmin && (
-					<PrivateContent accessRoles={[ROLES.ADMIN]}>
-						<Link to={`/hotel/${hotelId}/edit`}>
-							<CiEdit />
-						</Link>
-					</PrivateContent>
-				)}
-			</h1>
+				</div>
+				<div className={styles.rightAligned}>
+					{isAdmin && (
+						<PrivateContent accessRoles={[ROLES.ADMIN]}>
+							<Link to={`/hotel/${hotelId}/edit`}>
+								<span className={styles.editPanel}>Edit this hotel</span>
+								<CiEdit />
+							</Link>
+						</PrivateContent>
+					)}
+				</div>
+			</div>
 
 			<div className={styles.content}>
 				<Slider images={images} />
@@ -72,7 +79,7 @@ export const HotelContent = ({ hotelData }) => {
 					</span>
 
 					<button
-						className={styles.bookBtn}
+						className={isLogged ? styles.bookBtn : styles.bookBtnDisabled}
 						disabled={!isLogged}
 						onClick={() => {
 							setShowBookingForm(!showBookingForm);
@@ -83,16 +90,16 @@ export const HotelContent = ({ hotelData }) => {
 					</button>
 				</div>
 			</div>
-			{showBookingForm && (
-				<BookingForm
-					submitForm={submitForm}
-					cancelForm={() => setShowBookingForm(!showBookingForm)}
-				/>
-			)}
-			{/* ref is here just because it looks better */}
 			<div ref={formRef}>
-				<Reviews reviews={reviews} hotelId={hotelId} />
+				{showBookingForm && (
+					<BookingForm
+						submitForm={submitForm}
+						cancelForm={() => setShowBookingForm(!showBookingForm)}
+					/>
+				)}
 			</div>
-		</div>
+
+			<Reviews reviews={reviews} hotelId={hotelId} />
+		</>
 	);
 };

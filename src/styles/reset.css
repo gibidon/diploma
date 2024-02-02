@@ -94,21 +94,15 @@ ins {
 	text-decoration: none; /* убираем подчеркивание для вставленного текста */
 }
 del {
-	text-decoration: line-through; /* убираем перечеркивание для удаленного текста */
+	text-decoration: line-through;
 }
 
 img {
 	max-width: 100%;
+	border-radius: 8px;
 }
 
 *::before,
 *::after {
 	box-sizing: border-box;
-}
-
-input[type='text'] {
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-	margin: 0;
 }

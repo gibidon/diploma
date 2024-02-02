@@ -1,11 +1,15 @@
 .review {
 	display: flex;
 	justify-content: space-between;
-	padding: 0.3rem;
+	padding: 0.4rem;
 	border: 1px solid lightgray;
 	border-radius: 6px;
 }
 
 .review:hover {
-	background-color: lightgray;
+	background-color: rgb(189, 189, 189);
+}
+
+.author {
+	font-weight: 600;
 }

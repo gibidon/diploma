@@ -5,13 +5,7 @@
 	align-items: stretch;
 	overflow: hidden;
 }
-.authSidebar {
-	display: flex;
-	flex-direction: column;
-	box-sizing: border-box;
-	width: 426px;
-	background: #080808;
-}
+
 form {
 	display: flex;
 	flex-direction: column;
@@ -33,11 +27,20 @@ form {
 	padding: 5px 10px;
 	background-color: #100530;
 	color: white;
-	border-radius: 1rem;
+	border-radius: 5px;
 	font-weight: 600;
 	cursor: pointer;
 }
 
+.submitBtn:hover {
+	color: gray;
+}
 label {
 	font-weight: 600;
+}
+
+.errorMessage {
+	/* font-size: 18px; */
+	font-weight: 600;
+	color: rgb(158, 11, 11);
 }

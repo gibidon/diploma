@@ -7,21 +7,22 @@ import { Review } from './review';
 import styles from './reviews.module.css';
 
 export const Reviews = ({ reviews, hotelId }) => {
-	const [newComment, setNewComment] = useState('');
+	console.log('reviews: ', reviews);
+	const [newReview, setNewReview] = useState('');
 	const dispatch = useDispatch();
 	const userRole = useSelector(selectUserRole);
 
 	const isGuest = userRole === ROLES.GUEST;
 
-	const onNewReviewAdd = (hotelId, content) => {
-		dispatch(addReviewAsync(hotelId, content));
-		setNewComment('');
+	const onNewReviewAdd = (hotelId, newReview) => {
+		dispatch(addReviewAsync(hotelId, newReview));
+		setNewReview('');
 	};
 
 	return (
 		<div className={styles.reviews}>
 			<div className={styles.header}>Reviews:</div>
-			{reviews.map((review) => (
+			{/* {reviews.map((review) => (
 				<Review
 					key={review._id}
 					content={review.content}
@@ -29,25 +30,34 @@ export const Reviews = ({ reviews, hotelId }) => {
 					reviewId={review._id}
 					hotelId={hotelId}
 				/>
+			))} */}
+			{reviews.map(({ _id, content, author, _reviewId, hotelId }) => (
+				<Review
+					key={_id}
+					content={content}
+					author={author.login}
+					reviewId={_reviewId}
+					hotelId={hotelId}
+				/>
 			))}
 
 			{!isGuest && (
-				<div className="new-comment">
+				<div className={styles.newComment}>
 					<textarea
-						value={newComment}
+						className={styles.textarea}
+						value={newReview}
 						name="comment"
 						placeholder="Комментарии.."
 						onChange={({ target }) => {
-							setNewComment(target.value);
+							setNewReview(target.value);
 						}}
 					></textarea>
+
 					<button
-						id="fa-paper-plane-o"
-						margin=" 0 0 0 10px"
-						size="18px"
-						onClick={() => onNewReviewAdd(hotelId, newComment)}
+						className={styles.addBtn}
+						onClick={() => onNewReviewAdd(hotelId, newReview)}
 					>
-						add review
+						add
 					</button>
 				</div>
 			)}

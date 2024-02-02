@@ -1,22 +1,24 @@
 import { useState, useEffect, useContext } from 'react';
-import ApiContext from '#contexts/api';
+import { useLoading } from '#hooks';
+import { ApiContext } from '#contexts/api';
 
-export default function useApi(key, ...args) {
+export function useApi(key, ...args) {
 	const api = useContext(ApiContext);
-	const apiFn = key.split('.').reduce((obj, name) => obj[name], api);
+	const apiFunction = key.split('.').reduce((obj, name) => obj[name], api);
+	const { setLoading } = useLoading();
 
-	// const [done, setDone] = useState(false);
-	const [data, setData] = useState(null);
+	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		apiFn(...args)
-			.then((text) => setData(text))
-			.catch((e) => setError(e));
-		// .finally(() => setDone(true));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		setLoading(true);
+		apiFunction(...args)
+			.then((data) => {
+				setData(data, typeof data);
+			})
+			.catch((e) => setError(e))
+			.finally(() => setLoading(false));
+	}, [...args]);
 
-	// return { done, data, error };
 	return { data, error };
 }

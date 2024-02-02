@@ -5,7 +5,6 @@ export const Container = ({ children, maxWidth, ...props }) => {
 		<div
 			className={styles.container}
 			style={{ maxWidth: maxWidth + 'px', ...props }}
-			// {...props}
 		>
 			{children}
 		</div>

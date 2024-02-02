@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { ROLES } from '#constants/roles';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFetch, useResetForm } from '#hooks';
+import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { selectUserRole } from '#selectors';
 import { Button, Container, Input } from '#components';
 import { setUser } from '#actions';
 import { request } from '#utils';
-import styles from './registration.module.scss';
+import styles from './registration.module.css';
 
 const regFormSchema = yup.object().shape({
 	login: yup
@@ -62,9 +63,10 @@ export const Registration = () => {
 					setServerError(`Ошибка запроса, ${error}`);
 					return;
 				}
+
 				dispatch(setUser(user));
 				sessionStorage.setItem('userData', JSON.stringify(user));
-				// navigate('/');
+				navigate('/');
 			},
 		);
 	};
@@ -76,51 +78,67 @@ export const Registration = () => {
 
 	const errorMessage = formError || serverError;
 
-	// if (roleId !== ROLES.GUEST) {
-	// 	return <Navigate to="/" />;
-	// }
+	if (roleId !== ROLES.GUEST) {
+		return <Navigate to="/" />;
+	}
 
 	return (
-		<>
-			<Container maxWidth={800}>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div>
-						<label htmlFor="login">Login</label>
-						<br />
-						<Input
-							type="text"
-							placeholder="enter login"
-							id="login"
-							{...register('login', { onChange: () => {} })}
-							autoFocus
-						/>
-					</div>
-					<div>
-						<label htmlFor="password">Password</label>
-						<br />
-						<Input
-							type="password"
-							placeholder="password"
-							id="password"
-							{...register('password', { onChange: () => {} })}
-						/>
-					</div>
-					<div>
-						<label htmlFor="passcheck">Confirm password</label>
-						<br />
-						<Input
-							type="password"
-							placeholder="confirm password"
-							id="passcheck"
-							{...register('passcheck', { onChange: () => {} })}
-						/>
-					</div>
-					<Button className={styles.submitBtn} type="submit">
-						Submit
-					</Button>
-				</form>
-				<div>{errorMessage}</div>
-			</Container>
-		</>
+		<div className={styles.container}>
+			<h1>Sign up</h1>
+			<br />
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<div>
+					<label htmlFor="login">Login</label>
+					<br />
+					<Input
+						type="text"
+						placeholder="enter login"
+						id="login"
+						{...register('login', {
+							onChange: () => {
+								setServerError(null);
+							},
+						})}
+						autoFocus
+					/>
+				</div>
+				<div>
+					<label htmlFor="password">Password</label>
+					<br />
+					<Input
+						type="password"
+						placeholder="password"
+						id="password"
+						{...register('password', {
+							onChange: () => {
+								setServerError(null);
+							},
+						})}
+					/>
+				</div>
+				<div>
+					<label htmlFor="passcheck">Confirm password</label>
+					<br />
+					<Input
+						type="password"
+						placeholder="confirm password"
+						id="passcheck"
+						{...register('passcheck', {
+							onChange: () => {
+								setServerError(null);
+							},
+						})}
+					/>
+				</div>
+				<Button className={styles.submitBtn} type="submit">
+					Submit
+				</Button>
+			</form>
+			<br />
+			<div>
+				<Link to="/login">Already registered? Sign in</Link>
+			</div>
+			<div>{errorMessage}</div>
+		</div>
 	);
 };

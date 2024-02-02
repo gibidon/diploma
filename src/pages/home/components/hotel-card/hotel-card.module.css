@@ -1,20 +1,13 @@
-/* // *::before,
-// ::after {
-// 	box-sizing: border-box;
-// } */
-img {
-	width: 100%;
-	object-fit: cover;
-	border-radius: 8px;
-}
 .card {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	gap: 0.5rem;
 	transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
 	border: 1px solid rgb(226, 224, 224);
 	padding: 5px 10px;
 	border-radius: 8px;
+	max-width: 400px;
 }
 
 .title {

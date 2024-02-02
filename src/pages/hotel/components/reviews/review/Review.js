@@ -27,7 +27,7 @@ export const Review = ({ content, author, hotelId, reviewId }) => {
 
 	return (
 		<div className={styles.review}>
-			<div>Content: {content}</div>
+			<div className={styles.content}>{content}</div>
 			<div className={styles.author}> Author: {author}</div>
 			{isAdmin && (
 				<button onClick={() => onDeleteReview(reviewId)}>Delete</button>

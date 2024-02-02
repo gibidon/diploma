@@ -68,7 +68,7 @@ export const ControlPanel = () => {
 							style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
 						/>
 					</Link>
-					<Link to="/users">
+					<Link to="/admin">
 						<FaUsers
 							style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
 						/>

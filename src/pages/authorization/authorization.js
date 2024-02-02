@@ -53,6 +53,8 @@ export const Authorization = () => {
 				setServerError(`Ошибка запроса, ${error}`);
 				return;
 			}
+
+			console.log(user);
 			dispatch(setUser(user));
 			sessionStorage.setItem('userData', JSON.stringify(user));
 		});
@@ -67,13 +69,9 @@ export const Authorization = () => {
 
 	return (
 		<div className={styles.mainContainer}>
-			<section className={styles.authSidebar}>
-				<div className={styles.sidebarUpper}>
-					Don't just book <br /> Enjoy
-				</div>
-				<div className={styles.sidebarLower}></div>
-			</section>
 			<section className={styles.content}>
+				<h1>Sign in</h1>
+
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div>
 						<label htmlFor="login">Login</label>
@@ -82,7 +80,11 @@ export const Authorization = () => {
 							type="text"
 							placeholder="enter login"
 							id="login"
-							{...register('login', { onChange: () => {} })}
+							{...register('login', {
+								onChange: () => {
+									setServerError(null);
+								},
+							})}
 							autoFocus
 						/>
 					</div>
@@ -93,21 +95,24 @@ export const Authorization = () => {
 							type="password"
 							placeholder="password"
 							id="password"
-							{...register('password', { onChange: () => {} })}
+							{...register('password', {
+								onChange: () => {
+									setServerError(null);
+								},
+							})}
 						/>
 					</div>
+
 					<Button className={styles.submitBtn} type="submit">
 						Submit
 					</Button>
 				</form>
-				<div>{errorMessage}</div>
+				<div className={styles.errorMessage}>{errorMessage}</div>
+
 				<div>
 					<Link to="/register">
 						Don't have account yet? Go to register page
 					</Link>
-				</div>
-				<div>
-					<a href="/register">Go with reload with a tag</a>
 				</div>
 			</section>
 		</div>

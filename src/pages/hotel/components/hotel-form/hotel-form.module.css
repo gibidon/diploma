@@ -32,3 +32,13 @@
 	outline: none;
 	box-shadow: 0 0 0 4px #cbd6ee;
 }
+
+.textarea {
+	resize: horizontal;
+	width: 400px;
+	height: 150px;
+}
+
+.images {
+	max-width: 300px;
+}

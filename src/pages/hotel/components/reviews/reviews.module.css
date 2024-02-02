@@ -1,11 +1,9 @@
 .reviews {
 	padding: 0.5rem 1rem;
-	/* border: 1px solid lightblue; */
-	/* border-radius: 10px; */
 	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 1rem;
 }
 
 .header {
@@ -15,4 +13,25 @@
 
 .reviews:hover {
 	background-color: rgb(243, 247, 247);
+}
+
+.textarea {
+	width: 100%;
+	border: 1px solid lightblue;
+	border-radius: 8px;
+	min-height: 3rem;
+}
+
+.addBtn {
+	min-width: 80px;
+	padding: 0.3rem 1rem;
+	font-family: inherit;
+	border: 1px solid transparent;
+	background: rgb(255, 170, 13);
+	border-radius: 6px;
+	font-size: 18px;
+}
+
+.addBtn:hover {
+	border: 1px solid black;
 }
