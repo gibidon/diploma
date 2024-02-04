@@ -1,0 +1,17 @@
+%page-base {
+	margin: 0 auto;
+	max-width: 1168px;
+	margin-top: 20px;
+	position: relative;
+	min-height: 80dvh;
+}
+
+.pageLight {
+	@extend %page-base;
+	color: var(--text-dark);
+}
+
+.pageDark {
+	@extend %page-base;
+	color: var(--text-white);
+}

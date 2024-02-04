@@ -1,20 +1,16 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../contexts/themes';
 import { ControlPanel, Logo, ToggleSwitch } from './components';
-// import { useMatch } from 'react-router-dom';
+import { useThemeContext } from '#hooks';
 import styles from './header.module.css';
 
 export const Header = () => {
-	// const isMainPage = useMatch('/');
-	const { toggleTheme } = useContext(ThemeContext);
+	const { theme, toggleTheme } = useThemeContext();
 
 	return (
-		<div className={styles.main}>
+		<div className={theme === 'light' ? styles.main : styles.mainDark}>
 			<div className={styles.headerContent}>
 				<Logo />
 				<ToggleSwitch toggleTheme={toggleTheme} />
 				<ControlPanel />
-				{/* {isMainPage && <HeaderSearch />} */}
 			</div>
 		</div>
 	);

@@ -1,11 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams, useMatch } from 'react-router-dom';
-import { loadHotelAsync, setHotelData, RESET_HOTEL_DATA } from '#actions';
-import { useApi, useLoading } from '#hooks';
+import { loadHotelAsync, RESET_HOTEL_DATA } from '#actions';
+import { useLoading } from '#hooks';
 import { ROLES } from '#constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectHotel } from '#selectors';
-
 import { HotelForm, HotelContent } from './components';
 import { Loader, PrivateContent } from '#components';
 
@@ -31,6 +30,7 @@ export const Hotel = () => {
 		}
 
 		setLoading(true);
+
 		dispatch(loadHotelAsync(params.id)).then((hotelData) => {
 			setError(hotelData.error);
 			setLoading(false);
@@ -38,13 +38,14 @@ export const Hotel = () => {
 	}, [dispatch, params.id, isCreating, setLoading]);
 
 	// const { data } = useApi('hotels.one', params.id);
-	// console.log(data);
-	// // const { hotel } = data ?? [];
-	// const hotel = data ?? {};
+
+	// const hotel = data?.hotel;
+	// // const hotel = data ?? {};
 	// console.log(hotel);
 
 	if (loading) return <Loader />;
 
+	console.log('hotel', hotel);
 	const SpecificHotelPage =
 		isEditing || isCreating ? (
 			<PrivateContent accessRoles={[ROLES.ADMIN]} serverError={error}>

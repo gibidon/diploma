@@ -28,8 +28,6 @@ export const HotelForm = ({
 	const dispatch = useDispatch();
 	const isCreating = useMatch('/hotel/create');
 
-	console.log('i', images);
-
 	const [formState, setFormState] = useState({
 		title,
 		description,

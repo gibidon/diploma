@@ -1,10 +1,25 @@
-.footer {
+%base-footer {
 	width: 100%;
-	// display: flex;
-	// justify-content: space-between;
-	// padding: 2rem;
-	background-color: hsl(229, 71%, 32%);
-	// box-shadow: ;
 	padding: 15px 0;
 	height: 50px;
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.footerLight {
+	@extend %base-footer;
+	background-color: var(--background-blue);
+	color: var(--text-white);
+}
+
+.footerDark {
+	@extend %base-footer;
+	background-color: var(--background-black);
+	color: var(--text-white);
+}
+
+.content {
+	margin: 0 auto;
+	max-width: 1168px;
 }

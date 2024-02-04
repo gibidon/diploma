@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	useDebouncedFunction,
 	useDownloadHotels,
@@ -10,18 +10,23 @@ import { DEBOUNCE_DELAY, PAGINATION_LIMIT } from '#constants';
 import { BoldText, Loader } from '#components';
 import styles from './home.module.css';
 
-export const Home = () => {
-	const [searchParams, setSearchParams] = useState({
-		searchPhrase: '',
-		page: 1,
-		PAGINATION_LIMIT,
-		country: '',
-		min: 1,
-		max: 1000,
-		rating: null,
-	});
+const initialSearchParams = {
+	searchPhrase: '',
+	page: 1,
+	PAGINATION_LIMIT,
+	country: '',
+	min: 1,
+	max: 1000,
+	rating: null,
+};
 
-	const { loading } = useLoading();
+export const Home = () => {
+	// const [hotels, setHotels] = useState([]);
+	const [searchParams, setSearchParams] = useState(initialSearchParams);
+
+	console.log('sp', searchParams);
+
+	const { loading, setLoading } = useLoading();
 
 	const { searchPhrase, page, country, min, max, rating } = searchParams;
 
@@ -35,6 +40,33 @@ export const Home = () => {
 	// 	searchParams.rating,
 	// );
 
+	// useEffect only to make initial load:
+
+	// const loadHotels = async (
+	// 	searchPhrase,
+	// 	page,
+	// 	PAGINATION_LIMIT,
+	// 	country,
+	// 	min,
+	// 	max,
+	// ) => {
+	// 	console.log(searchPhrase, country, min, max);
+	// 	setLoading(true);
+
+	// 	const response = await fetch(
+	// 		`/hotels?search=${searchPhrase}&page=${page}&limit=${PAGINATION_LIMIT}&country=${country}&min=${min}&max=${max}`,
+	// 	);
+	// 	const { hotels } = await response.json();
+	// 	console.log(hotels);
+	// 	// return hotels;
+	// 	setHotels(hotels);
+	// 	setLoading(false);
+	// };
+
+	// useEffect(() => {
+	// 	loadHotels(searchPhrase, page, PAGINATION_LIMIT, country, min, max);
+	// }, []);
+
 	const { data } = useApi(
 		'hotels.all',
 		searchPhrase,
@@ -46,25 +78,34 @@ export const Home = () => {
 	);
 	const { hotels, lastPage } = data;
 
-	const debouncedSearchByParams = useDebouncedFunction(
-		setSearchParams,
-		DEBOUNCE_DELAY,
-	);
-
-	const onChange = (e) => {
-		debouncedSearchByParams({
-			...searchParams,
-			[e.target.name]: e.target.value,
-		});
-	};
+	const debouncedSearch = useDebouncedFunction(setSearchParams, 5000);
+	// const debouncedLoadHotels = useDebouncedFunction(loadHotels, DEBOUNCE_DELAY);
 
 	// const onChange = (e) => {
-	// 	setSearchParams({
+	// 	debouncedSearch({
 	// 		...searchParams,
 	// 		[e.target.name]: e.target.value,
 	// 	});
 	// };
 
+	const onChange = (e) => {
+		setSearchParams({
+			...searchParams,
+			[e.target.name]: e.target.value,
+		});
+
+		// setLoading(true);
+		// debouncedLoadHotels({ ...searchParams, [e.target.name]: e.target.value });
+
+		// console.log('h2', hotels);
+
+		// setHotels(hotels);
+		// setLoading(false);
+	};
+
+	const cleanSearchParams = () => {
+		setSearchParams(initialSearchParams);
+	};
 	// if (loading) return <Loader />;
 
 	return (
@@ -76,6 +117,7 @@ export const Home = () => {
 					min={min}
 					max={max}
 					onChange={onChange}
+					cleanSearchParams={cleanSearchParams}
 				/>
 				<div className={styles.content}>
 					{loading && <Loader />}

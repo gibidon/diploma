@@ -10,7 +10,7 @@ import {
 	UserPage,
 	Page404,
 } from '#pages';
-import { Container, Header, Footer, MailList, Modal } from '#components';
+import { Header, Footer, LayoutPage, MailList, Modal } from '#components';
 import { AdminPage } from '#pages/admin-page/admin-page';
 import './App.css';
 
@@ -32,14 +32,9 @@ export const App = () => {
 	}, [dispatch]);
 
 	return (
-		<div>
+		<>
 			<Header />
-			<Container
-				maxWidth={1168}
-				marginTop={'20px'}
-				minHeight={'80dvh'}
-				position={'relative'}
-			>
+			<LayoutPage>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Authorization />} />
@@ -52,9 +47,9 @@ export const App = () => {
 					<Route path="*" element={<Page404 />} />
 				</Routes>
 				<Modal />
-			</Container>
+			</LayoutPage>
 			<MailList />
 			<Footer />
-		</div>
+		</>
 	);
 };

@@ -17,7 +17,8 @@ export async function all(
 
 export async function one(id) {
 	const response = await fetch(`/hotel/${id}`);
+	console.log('in one: ', response);
 	const { data } = await response.json();
-
+	console.log('in one:', data);
 	return data;
 }

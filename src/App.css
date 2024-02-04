@@ -7,27 +7,21 @@
 	src: url('./assets/fonts/InterTight-Medium.ttf') format('ttf');
 }
 
-a {
-	text-decoration: none;
-	color: black;
-}
-
 :root {
-	--background: #f2f2f2;
-	--text-primary: #0f0f0f;
-	--text-secondary: #4e4e4e;
-	--accent: #dfb017;
-	--accent-hover: #cea315;
-	--border: #1f1e1e;
-	--shadow: 7px 15px 13px -4px #00000056;
+	--background-black: #000;
+	--background-white: #f2f2f2;
+	--background-dark: rgb(22, 20, 20);
+	--background-pink: rgb(199, 97, 212);
+	--background-blue: #003b95;
+	--background-light-orange: #df9330;
+	--background-light-gray: #83807c;
+	--text-white: white;
+	--text-dark: black;
 
-	[data-theme='dark'] {
-		--background: #05010a;
-		--text-primary: #f2f2f2;
-		--text-secondary: #a7a4a4;
-		--accent: #6a5acd;
-		--accent-hover: #5b4cbe;
-		--border: #696969;
-		--shadow: 7px 15px 13px -4px #ffffff1b;
-	}
+	--btn-orange: rgb(236, 181, 29);
+	--btn-green: rgb(50, 167, 85);
+	--btn-red: rgb(241, 108, 31);
+	--btn-black: rgb(7, 7, 6);
+
+	--customPink: rgb(185, 38, 190);
 }

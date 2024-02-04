@@ -12,7 +12,7 @@ import { request } from '#utils';
 import styles from './hotel-content.module.css';
 
 export const HotelContent = ({ hotelData }) => {
-	console.log('hotelData in hotelContent: ', hotelData);
+	console.log('hdata', hotelData);
 	const [showBookingForm, setShowBookingForm] = useState(false);
 	const formRef = useRef(null);
 
@@ -27,8 +27,6 @@ export const HotelContent = ({ hotelData }) => {
 		rating,
 	} = hotelData;
 
-	console.log('reviews in hotelContent: ', reviews);
-
 	const userId = useSelector(selectUserId);
 	const userRole = useSelector(selectUserRole);
 	const isLogged = userRole !== ROLES.GUEST;
@@ -39,6 +37,8 @@ export const HotelContent = ({ hotelData }) => {
 			...formData,
 			['user']: userId,
 			['hotel']: hotelId,
+			// userId,
+			// hotelId,
 		});
 
 		setShowBookingForm(!showBookingForm);

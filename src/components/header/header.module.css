@@ -7,6 +7,14 @@
 	top: 0;
 }
 
+.mainDark {
+	z-index: 10;
+	height: 10dvh;
+	position: sticky;
+	top: 0;
+	background-color: #242020;
+}
+
 .headerContent {
 	display: flex;
 	justify-content: space-between;

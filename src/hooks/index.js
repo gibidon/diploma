@@ -7,3 +7,4 @@ export * from './use-download-hotel';
 export * from './useApi';
 
 export * from './useLoading';
+export * from './useThemeContext';

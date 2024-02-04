@@ -1,10 +1,12 @@
-import { Container } from '../container/container';
+import { useThemeContext } from '#hooks';
 import styles from './footer.module.scss';
 
 export const Footer = () => {
+	const { theme } = useThemeContext();
+
 	return (
-		<div className={styles.footer}>
-			<Container maxWidth={1168}>footer</Container>
+		<div className={theme === 'light' ? styles.footerLight : styles.footerDark}>
+			<div className={styles.content}>© all right reserved</div>
 		</div>
 	);
 };
