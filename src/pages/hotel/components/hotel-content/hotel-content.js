@@ -12,8 +12,8 @@ import { request } from '#utils';
 import styles from './hotel-content.module.css';
 
 export const HotelContent = ({ hotelData }) => {
-	console.log('hdata', hotelData);
 	const [showBookingForm, setShowBookingForm] = useState(false);
+	const [error, setError] = useState('');
 	const formRef = useRef(null);
 
 	const {
@@ -33,13 +33,22 @@ export const HotelContent = ({ hotelData }) => {
 	const isAdmin = userRole === ROLES.ADMIN;
 
 	const submitForm = async (formData) => {
-		await request(`/users/${userId}/reservations`, 'POST', {
-			...formData,
-			['user']: userId,
-			['hotel']: hotelId,
-			// userId,
-			// hotelId,
-		});
+		//TODO change user and hotel to userId and hotel,difference with DB storing
+		try {
+			const { data, error } = await request(
+				`/users/${userId}/reservations`,
+				'POST',
+				{
+					...formData,
+					user: userId,
+					hotel: hotelId,
+				},
+			);
+
+			if (error) setError(error);
+		} catch (error) {
+			throw new Error('Something wrong happened when submitting form..');
+		}
 
 		setShowBookingForm(!showBookingForm);
 	};
@@ -61,8 +70,8 @@ export const HotelContent = ({ hotelData }) => {
 					{isAdmin && (
 						<PrivateContent accessRoles={[ROLES.ADMIN]}>
 							<Link to={`/hotel/${hotelId}/edit`}>
-								<span className={styles.editPanel}>Edit this hotel</span>
-								<CiEdit />
+								<span className={styles.editPanel}>Edit hotel</span>
+								{/* <CiEdit /> */}
 							</Link>
 						</PrivateContent>
 					)}
@@ -84,12 +93,17 @@ export const HotelContent = ({ hotelData }) => {
 						onClick={() => {
 							setShowBookingForm(!showBookingForm);
 							formRef.current?.scrollIntoView({ behavior: 'smooth' });
+							setError('');
 						}}
 					>
 						Book now
 					</button>
 				</div>
 			</div>
+			<div className={styles.errorMessage}>
+				{error && <div>Error: {error}</div>}
+			</div>
+
 			<div ref={formRef}>
 				{showBookingForm && (
 					<BookingForm
@@ -98,7 +112,6 @@ export const HotelContent = ({ hotelData }) => {
 					/>
 				)}
 			</div>
-
 			<Reviews reviews={reviews} hotelId={hotelId} />
 		</>
 	);

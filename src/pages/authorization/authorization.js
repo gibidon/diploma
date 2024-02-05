@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Button, Input } from '#components';
-import { useResetForm } from '#hooks';
+import { useResetForm, useThemeContext } from '#hooks';
 import { setUser } from '#actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserRole } from '#selectors';
@@ -34,6 +34,7 @@ export const Authorization = () => {
 	const [serverError, setServerError] = useState(null);
 	const roleId = useSelector(selectUserRole);
 	const dispatch = useDispatch();
+	const { theme } = useThemeContext();
 
 	const {
 		register,
@@ -54,7 +55,6 @@ export const Authorization = () => {
 				return;
 			}
 
-			console.log(user);
 			dispatch(setUser(user));
 			sessionStorage.setItem('userData', JSON.stringify(user));
 		});
@@ -69,7 +69,9 @@ export const Authorization = () => {
 
 	return (
 		<div className={styles.mainContainer}>
-			<section className={styles.content}>
+			<section
+				className={theme === 'light' ? styles.content : styles.contentDark}
+			>
 				<h1>Sign in</h1>
 
 				<form onSubmit={handleSubmit(onSubmit)}>

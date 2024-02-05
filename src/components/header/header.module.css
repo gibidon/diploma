@@ -1,4 +1,5 @@
 /* // @use '../../styles/variables'; */
+
 .main {
 	z-index: 10;
 	background-color: #003b95;
@@ -21,9 +22,17 @@
 	max-width: 1168px;
 	margin: 0 auto;
 	z-index: 20;
+	color: white;
 }
 
 .logo {
 	font-size: 30px;
 	color: white;
+}
+
+.rightAligned {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 1.5rem;
 }

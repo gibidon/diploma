@@ -9,8 +9,11 @@ export const Header = () => {
 		<div className={theme === 'light' ? styles.main : styles.mainDark}>
 			<div className={styles.headerContent}>
 				<Logo />
-				<ToggleSwitch toggleTheme={toggleTheme} />
-				<ControlPanel />
+				<div className={styles.rightAligned}>
+					<span>Switch to {theme === 'light' ? 'dark' : 'light'} mode</span>
+					<ToggleSwitch toggleTheme={toggleTheme} />
+					<ControlPanel />
+				</div>
 			</div>
 		</div>
 	);

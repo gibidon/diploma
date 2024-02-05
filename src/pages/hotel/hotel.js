@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams, useMatch } from 'react-router-dom';
 import { loadHotelAsync, RESET_HOTEL_DATA } from '#actions';
-import { useLoading } from '#hooks';
+import { useLoading, useApi } from '#hooks';
 import { ROLES } from '#constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectHotel } from '#selectors';
@@ -40,12 +40,10 @@ export const Hotel = () => {
 	// const { data } = useApi('hotels.one', params.id);
 
 	// const hotel = data?.hotel;
-	// // const hotel = data ?? {};
 	// console.log(hotel);
 
 	if (loading) return <Loader />;
 
-	console.log('hotel', hotel);
 	const SpecificHotelPage =
 		isEditing || isCreating ? (
 			<PrivateContent accessRoles={[ROLES.ADMIN]} serverError={error}>

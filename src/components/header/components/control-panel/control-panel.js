@@ -31,10 +31,7 @@ export const ControlPanel = () => {
 			{roleId === ROLES.GUEST ? (
 				<span className={styles.highlight}>
 					<Link to="/login" className={styles.link}>
-						<FaUser
-							className={styles.loginIcon}
-							// style={{ color: 'white', fontSize: '24px' }}
-						/>
+						<FaUser className={styles.loginIcon} />
 					</Link>
 				</span>
 			) : (

@@ -1,21 +1,18 @@
-import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { saveHotelAsync, removeHotelAsync } from '#actions';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Input, EditableInput } from '#components';
 import { FiSave } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
-
 import styles from './hotel-form.module.css';
-// import { Icon, Input } from '../../../../components';
 
-// import { SpecialPanel } from '../special-panel/special-panel';
 // import { savePostAsync } from '../../../../actions';
 
 const emptyFormData = {
 	title: '',
 	description: '',
-	price: 0,
+	price: '',
 	country: '',
 	rating: '',
 	images: [],
@@ -24,6 +21,8 @@ const emptyFormData = {
 export const HotelForm = ({
 	hotelData: { id, title, images, description, price, country, rating },
 }) => {
+	console.log('rendering hotel form//');
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isCreating = useMatch('/hotel/create');
@@ -38,13 +37,14 @@ export const HotelForm = ({
 		images,
 	});
 
+	console.log('formState: ', formState);
+	// console.log('images: ', images);
 	// if we come from hotel-page to url /hotel/edit,form data is taken from hotel. Otherwise we clean the form in useLayoutEffect:
 	useLayoutEffect(() => {
 		if (!id) setFormState(emptyFormData);
 	}, [id]);
 
 	const onSave = () => {
-		// const newContent = sanitizeContent(contentRef.current.innerHTML);
 		dispatch(saveHotelAsync(id, formState)).then(({ id }) => {
 			navigate(`/hotel/${id}`);
 			// navigate('/');
@@ -62,16 +62,17 @@ export const HotelForm = ({
 
 	const onImageChange = (index, imageUrl) => {
 		const newformState = { ...formState };
-		console.log(newformState);
 		newformState.images[index] = imageUrl;
 		setFormState(newformState);
+	};
 
-		// setFormState({
-		// 	...formState,
-		// 	['images']: formState.images.map((image, i) => {
-		// 		i === index ? target.value : imageUrl;
-		// 	}),
-		// });
+	const deleteImageInForm = (index) => {
+		console.log(index);
+
+		setFormState({
+			...formState,
+			images: formState.images.toSpliced(index, 1),
+		});
 	};
 
 	return (
@@ -122,30 +123,45 @@ export const HotelForm = ({
 			</div>
 			<div className={styles.images}>
 				<h3>Image urls:</h3>
-				<hr />
-				{images.map((image, index) => (
-					// <EditableInput key={index} id={index} label={index} value={image} />
-					<input
-						key={index}
-						id={index}
-						label={index}
-						value={image}
-						onChange={({ target }) => onImageChange(index, target.value)}
-					/>
+				{formState.images.map((image, index) => (
+					<div key={index} className={styles.imageUrlRow}>
+						<Input
+							key={index}
+							id={index}
+							label={index}
+							value={image}
+							onChange={({ target }) => onImageChange(index, target.value)}
+						/>
+						<button
+							onClick={() => {
+								deleteImageInForm(index);
+							}}
+						>
+							Delete
+						</button>
+					</div>
 				))}
 			</div>
-			<button className={styles.saveBtn}>
-				<FiSave size="21px" margin="0 10px 0 0" onClick={onSave} />
+			<button
+				className={styles.addImageBtn}
+				onClick={() =>
+					setFormState({
+						...formState,
+						images: [...formState.images, ''],
+					})
+				}
+			>
+				add imageUrl
+			</button>
+
+			<button className={styles.saveBtn} onClick={onSave}>
+				<FiSave size="21px" margin="0 10px 0 0" />
 			</button>
 			{!isCreating && (
-				<button className={styles.deleteBtn}>
-					<MdDeleteOutline size="21px" margin="0 10px 0 0" onClick={onDelete} />
+				<button className={styles.deleteBtn} onClick={onDelete}>
+					<MdDeleteOutline size="21px" margin="0 10px 0 0" />
 				</button>
 			)}
-
-			{/* <button className={styles.deleteBtn}>
-				<MdDeleteOutline size="21px" margin="0 10px 0 0" onClick={onDelete} />
-			</button> */}
 		</form>
 	);
 };

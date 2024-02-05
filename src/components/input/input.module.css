@@ -12,9 +12,8 @@
 .input:invalid,
 .input:valid {
 	padding-right: 2.25rem;
-
 	background-repeat: no-repeat;
-	background-position: right 0.5625rem center;
+	background-position: right 0.5rem center;
 	background-size: 1.125rem 1.125rem;
 }
 

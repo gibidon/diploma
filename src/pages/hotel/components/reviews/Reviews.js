@@ -9,6 +9,7 @@ import styles from './reviews.module.css';
 export const Reviews = ({ reviews, hotelId }) => {
 	console.log('reviews: ', reviews);
 	const [newReview, setNewReview] = useState('');
+
 	const dispatch = useDispatch();
 	const userRole = useSelector(selectUserRole);
 
@@ -47,7 +48,7 @@ export const Reviews = ({ reviews, hotelId }) => {
 						className={styles.textarea}
 						value={newReview}
 						name="comment"
-						placeholder="Комментарии.."
+						placeholder="Добавить отзыв.."
 						onChange={({ target }) => {
 							setNewReview(target.value);
 						}}
@@ -57,7 +58,7 @@ export const Reviews = ({ reviews, hotelId }) => {
 						className={styles.addBtn}
 						onClick={() => onNewReviewAdd(hotelId, newReview)}
 					>
-						add
+						add review
 					</button>
 				</div>
 			)}

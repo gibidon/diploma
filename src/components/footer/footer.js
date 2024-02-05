@@ -6,7 +6,7 @@ export const Footer = () => {
 
 	return (
 		<div className={theme === 'light' ? styles.footerLight : styles.footerDark}>
-			<div className={styles.content}>© all right reserved</div>
+			<div className={styles.content}>🄯 all rights reversed</div>
 		</div>
 	);
 };

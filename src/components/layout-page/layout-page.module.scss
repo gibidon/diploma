@@ -9,9 +9,12 @@
 .pageLight {
 	@extend %page-base;
 	color: var(--text-dark);
+	// background-color: var(--background-white);
 }
 
 .pageDark {
 	@extend %page-base;
 	color: var(--text-white);
+	background-color: var(--background-dark);
+	// color: darken(white, 90%);
 }

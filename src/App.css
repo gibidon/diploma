@@ -10,18 +10,26 @@
 :root {
 	--background-black: #000;
 	--background-white: #f2f2f2;
-	--background-dark: rgb(22, 20, 20);
+	--background-dim-white: hsl(0, 12%, 94%);
+	--background-dark: rgb(58, 50, 50);
 	--background-pink: rgb(199, 97, 212);
 	--background-blue: #003b95;
+	--background-light-blue: #386ebe;
 	--background-light-orange: #df9330;
 	--background-light-gray: #83807c;
-	--text-white: white;
+	--background-dark-gray: #5a5754;
+	--background-green: rgb(14, 126, 14);
+	--text-white: hsl(0, 48%, 94%);
 	--text-dark: black;
+	--text-light-gray: rgb(158, 147, 147);
+	--text-error-red: rgb(209, 25, 25);
 
 	--btn-orange: rgb(236, 181, 29);
 	--btn-green: rgb(50, 167, 85);
 	--btn-red: rgb(241, 108, 31);
 	--btn-black: rgb(7, 7, 6);
+	--btn-blue: #003b95;
+	--btn-light-blue: #386ebe;
 
 	--customPink: rgb(185, 38, 190);
 }

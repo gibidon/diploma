@@ -33,7 +33,7 @@ export const UserPage = () => {
 			})
 			.catch((e) => setError(e))
 			.finally(() => setLoading(false));
-	}, [params.id, shouldUpdate]);
+	}, [params.id, shouldUpdate, setLoading]);
 
 	if (loading) return <Loader />;
 
@@ -48,18 +48,20 @@ export const UserPage = () => {
 							<h1>My bookings: </h1>
 
 							<div className={styles.bookings}>
-								{data.map(({ id, user, checkIn, checkOut, guests, hotel }) => (
-									<BookingTemplate
-										key={id}
-										id={id}
-										userLogin={user.login}
-										checkIn={checkIn}
-										checkOut={checkOut}
-										guests={guests}
-										hotel={hotel}
-										updatePage={updatePage}
-									/>
-								))}
+								{data.map(
+									({ id, user, checkIn, checkOut, guestQuantity, hotel }) => (
+										<BookingTemplate
+											key={id}
+											id={id}
+											userLogin={user.login}
+											checkIn={checkIn}
+											checkOut={checkOut}
+											guestQuantity={guestQuantity}
+											hotel={hotel}
+											updatePage={updatePage}
+										/>
+									),
+								)}
 							</div>
 						</div>
 					) : (

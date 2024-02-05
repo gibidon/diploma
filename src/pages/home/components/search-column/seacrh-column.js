@@ -3,12 +3,6 @@ import { useThemeContext } from '#hooks';
 import { MultiRangeSlider } from './components/multi-range-slider';
 import styles from './search-column.module.css';
 
-// const countryOptions = [
-// 	{ value: 'Thailand', label: 'Thailand' },
-// 	{ value: 'Cyprus', label: 'Cyprus' },
-// 	{ value: 'Vietban', label: 'Vietnam' },
-// ];
-
 export const SearchColumn = ({
 	searchPhrase,
 	country,
@@ -33,7 +27,7 @@ export const SearchColumn = ({
 					type="text"
 					id="searchPhrase"
 					name="searchPhrase"
-					value={searchPhrase}
+					// value={searchPhrase}
 					onChange={onChange}
 				/>
 			</div>
@@ -59,7 +53,7 @@ export const SearchColumn = ({
 					type="number"
 					id="min"
 					name="min"
-					value={min}
+					// value={min}
 					onChange={onChange}
 					step="50"
 				/>
@@ -70,14 +64,14 @@ export const SearchColumn = ({
 					type="number"
 					id="max"
 					name="max"
-					value={max}
+					// value={max}
 					onChange={onChange}
 					step="50"
 				/>
 			</div>
-			<div>
+			{/* <div>
 				<button onClick={cleanSearchParams}>reset</button>
-			</div>
+			</div> */}
 			{/* <MultiRangeSlider min={min} max={max} onChange={onChange} /> */}
 			{/* <label htmlFor="room">Sort by room number:</label>
 			<Input type="text" id="room" /> */}

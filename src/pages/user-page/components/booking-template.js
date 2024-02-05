@@ -10,7 +10,7 @@ export const BookingTemplate = ({
 	userLogin,
 	checkIn,
 	checkOut,
-	guests,
+	guestQuantity,
 	hotel,
 	updatePage,
 }) => {
@@ -19,11 +19,13 @@ export const BookingTemplate = ({
 		userLogin,
 		checkIn,
 		checkOut,
-		guests,
+		guestQuantity,
 		hotel,
 	});
 
+	console.log('formState : ', formState);
 	const { loading, setLoading } = useLoading();
+
 	const onChange = ({ target }) =>
 		setFormState({ ...formState, [target.name]: target.value });
 
@@ -31,9 +33,9 @@ export const BookingTemplate = ({
 		setLoading(true);
 
 		request(`/reservations/${id}`, 'PATCH', {
-			dateStart: formState.checkIn,
-			dateEnd: formState.checkOut,
-			guestQuantity: formState.guests,
+			checkIn: formState.checkIn,
+			checkOut: formState.checkOut,
+			guestQuantity: formState.guestQuantity,
 		})
 			.then(updatePage)
 			.then(setLoading(false));
@@ -58,8 +60,9 @@ export const BookingTemplate = ({
 					id={'check-in'}
 					label={'Check-in date:'}
 					type={'text'}
-					value={formState.checkIn}
+					value={formState.checkIn.substring(0, 10)}
 					name={'checkIn'}
+					placeholder={'yyyy-mm-dd'}
 					onChange={onChange}
 				/>
 			</div>
@@ -68,19 +71,20 @@ export const BookingTemplate = ({
 					id={'check-out'}
 					label={'Check-out date:'}
 					type={'text'}
-					value={formState.checkOut}
+					value={formState.checkOut.substring(0, 10)}
 					name={'checkOut'}
+					placeholder={'yyyy-mm-dd'}
 					onChange={onChange}
 				/>
 			</div>
 
 			<div>
 				<EditableInput
-					id={'guests'}
+					id={'guestQuantity'}
 					label={'Guest quantity:'}
 					type={'number'}
-					value={formState.guests}
-					name={'guests'}
+					value={formState.guestQuantity}
+					name={'guestQuantity'}
 					onChange={onChange}
 				/>
 			</div>

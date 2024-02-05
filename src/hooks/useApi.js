@@ -14,7 +14,7 @@ export function useApi(key, ...args) {
 		setLoading(true);
 		apiFunction(...args)
 			.then((data) => {
-				setData(data, typeof data);
+				setData(data);
 			})
 			.catch((e) => setError(e))
 			.finally(() => setLoading(false));

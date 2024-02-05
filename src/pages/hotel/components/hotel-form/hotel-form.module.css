@@ -5,8 +5,9 @@
 }
 
 .saveBtn,
-.deleteBtn {
-	max-width: 80px;
+.deleteBtn,
+.addImageBtn {
+	max-width: 100px;
 	font-family: inherit;
 	appearance: none;
 	border: 0;
@@ -41,4 +42,15 @@
 
 .images {
 	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.imageUrlRow {
+	display: flex;
+	gap: 1rem;
+}
+.addImageBtn {
+	background-color: var(--background-green);
 }

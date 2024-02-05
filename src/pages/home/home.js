@@ -58,7 +58,7 @@ export const Home = () => {
 	// 	);
 	// 	const { hotels } = await response.json();
 	// 	console.log(hotels);
-	// 	// return hotels;
+
 	// 	setHotels(hotels);
 	// 	setLoading(false);
 	// };
@@ -78,30 +78,22 @@ export const Home = () => {
 	);
 	const { hotels, lastPage } = data;
 
-	const debouncedSearch = useDebouncedFunction(setSearchParams, 5000);
+	const debouncedSearch = useDebouncedFunction(setSearchParams, DEBOUNCE_DELAY);
 	// const debouncedLoadHotels = useDebouncedFunction(loadHotels, DEBOUNCE_DELAY);
 
+	const onChange = (e) => {
+		debouncedSearch({
+			...searchParams,
+			[e.target.name]: e.target.value,
+		});
+	};
+
 	// const onChange = (e) => {
-	// 	debouncedSearch({
+	// 	setSearchParams({
 	// 		...searchParams,
 	// 		[e.target.name]: e.target.value,
 	// 	});
 	// };
-
-	const onChange = (e) => {
-		setSearchParams({
-			...searchParams,
-			[e.target.name]: e.target.value,
-		});
-
-		// setLoading(true);
-		// debouncedLoadHotels({ ...searchParams, [e.target.name]: e.target.value });
-
-		// console.log('h2', hotels);
-
-		// setHotels(hotels);
-		// setLoading(false);
-	};
 
 	const cleanSearchParams = () => {
 		setSearchParams(initialSearchParams);
