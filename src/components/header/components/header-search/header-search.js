@@ -3,10 +3,8 @@ import { FaBed } from 'react-icons/fa6';
 import { CiCalendar } from 'react-icons/ci';
 import { BsPersonStanding } from 'react-icons/bs';
 import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
 import format from 'date-fns/format';
-import styles from './header-search.module.css';
+import styles from './header-search.module.scss';
 
 export const HeaderSearch = () => {
 	const [openDate, setOpenDate] = useState(false);

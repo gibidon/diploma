@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserId, selectUserLogin } from '#selectors';
-import { useFetch, useApi, useLoading } from '#hooks';
+import { useLoading } from '#hooks';
 import { request } from '#utils';
 import { useParams } from 'react-router-dom';
 import { Loader } from '#components';
 import { BookingTemplate } from './components/booking-template';
-import styles from './user-page.module.css';
+import styles from './user-page.module.scss';
 
 export const UserPage = () => {
 	const params = useParams();
 	const [shouldUpdate, setShouldUpdate] = useState(false);
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
-	const userId = useSelector(selectUserId);
-	const userLogin = useSelector(selectUserLogin);
 
 	const { loading, setLoading } = useLoading();
 

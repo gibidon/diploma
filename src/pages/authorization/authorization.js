@@ -10,7 +10,7 @@ import { selectUserRole } from '#selectors';
 import { Link, Navigate } from 'react-router-dom';
 import { ROLES } from '#constants';
 import { request } from '#utils';
-import styles from './authorization.module.css';
+import styles from './authorization.module.scss';
 
 const authFormSchema = yup.object().shape({
 	login: yup
@@ -72,7 +72,7 @@ export const Authorization = () => {
 			<section
 				className={theme === 'light' ? styles.content : styles.contentDark}
 			>
-				<h1>Sign in</h1>
+				<h1>Log in</h1>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div>
@@ -106,15 +106,13 @@ export const Authorization = () => {
 					</div>
 
 					<Button className={styles.submitBtn} type="submit">
-						Submit
+						Continue
 					</Button>
 				</form>
 				<div className={styles.errorMessage}>{errorMessage}</div>
 
 				<div>
-					<Link to="/register">
-						Don't have account yet? Go to register page
-					</Link>
+					<Link to="/register">No account? Sign up</Link>
 				</div>
 			</section>
 		</div>

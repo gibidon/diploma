@@ -1,0 +1,8 @@
+@mixin green-font {
+	color: green;
+}
+
+@mixin dark-background-bright-font {
+	background-color: var(--background-light-gray);
+	color: var(--text-dim-white);
+}

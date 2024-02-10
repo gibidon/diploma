@@ -9,8 +9,6 @@ export const PrivateContent = ({
 }) => {
 	const userRole = useSelector(selectUserRole);
 
-	console.log('access and userRole before check ', accessRoles, userRole);
-
 	const accessError = checkAccess(accessRoles, userRole)
 		? null
 		: 'ERROR.ACCESS_DENIED';

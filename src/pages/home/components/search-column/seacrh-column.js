@@ -1,7 +1,7 @@
 import { Input } from '#components';
 import { useThemeContext } from '#hooks';
-import { MultiRangeSlider } from './components/multi-range-slider';
-import styles from './search-column.module.css';
+// import { MultiRangeSlider } from './components/multi-range-slider';
+import styles from './search-column.module.scss';
 
 export const SearchColumn = ({
 	searchPhrase,
@@ -9,7 +9,7 @@ export const SearchColumn = ({
 	min,
 	max,
 	onChange,
-	cleanSearchParams,
+
 	// onSelectChange,
 }) => {
 	const { theme } = useThemeContext();

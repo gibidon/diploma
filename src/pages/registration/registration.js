@@ -4,14 +4,14 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ROLES } from '#constants/roles';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useFetch, useResetForm } from '#hooks';
+import { useResetForm } from '#hooks';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { selectUserRole } from '#selectors';
-import { Button, Container, Input } from '#components';
+import { Button, Input } from '#components';
 import { setUser } from '#actions';
 import { request } from '#utils';
-import styles from './registration.module.css';
+import styles from './registration.module.scss';
 
 const regFormSchema = yup.object().shape({
 	login: yup
@@ -84,7 +84,7 @@ export const Registration = () => {
 
 	return (
 		<div className={styles.container}>
-			<h1>Sign up</h1>
+			<h1>Create account</h1>
 			<br />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>
@@ -131,14 +131,14 @@ export const Registration = () => {
 					/>
 				</div>
 				<Button className={styles.submitBtn} type="submit">
-					Submit
+					Create account
 				</Button>
 			</form>
 			<br />
 			<div>
-				<Link to="/login">Already registered? Sign in</Link>
+				<Link to="/login">Have an account? Log in</Link>
 			</div>
-			<div>{errorMessage}</div>
+			<div className={styles.errorMessage}>{errorMessage}</div>
 		</div>
 	);
 };

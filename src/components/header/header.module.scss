@@ -1,11 +1,10 @@
-/* // @use '../../styles/variables'; */
-
 .main {
 	z-index: 10;
-	background-color: #003b95;
 	height: 10dvh;
 	position: sticky;
 	top: 0;
+	color: var(--text-bright-white);
+	background-color: var(--background-blue);
 }
 
 .mainDark {
@@ -22,12 +21,13 @@
 	max-width: 1168px;
 	margin: 0 auto;
 	z-index: 20;
-	color: white;
 }
 
 .logo {
 	font-size: 30px;
-	color: white;
+}
+
+.leftAligned {
 }
 
 .rightAligned {

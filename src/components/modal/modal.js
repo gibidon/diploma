@@ -6,7 +6,7 @@ import {
 	selectModalOnConfirm,
 	selectModalText,
 } from '#selectors';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 export const Modal = () => {
 	const text = useSelector(selectModalText);

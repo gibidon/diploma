@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserRole } from '#selectors';
 import { addReviewAsync } from '#actions';
@@ -6,8 +6,11 @@ import { ROLES } from '#constants';
 import { Review } from './review';
 import styles from './reviews.module.css';
 
-export const Reviews = ({ reviews, hotelId }) => {
-	console.log('reviews: ', reviews);
+//React.memo helps reduce rerenders a bit,though not necessary
+export const Reviews = memo(({ reviews, hotelId }) => {
+	// export const Reviews = ({ reviews, hotelId }) => {
+	console.log('rendering reviews');
+
 	const [newReview, setNewReview] = useState('');
 
 	const dispatch = useDispatch();
@@ -23,25 +26,18 @@ export const Reviews = ({ reviews, hotelId }) => {
 	return (
 		<div className={styles.reviews}>
 			<div className={styles.header}>Reviews:</div>
-			{/* {reviews.map((review) => (
-				<Review
-					key={review._id}
-					content={review.content}
-					author={review.author.login}
-					reviewId={review._id}
-					hotelId={hotelId}
-				/>
-			))} */}
-			{reviews.map(({ _id, content, author, _reviewId, hotelId }) => (
+
+			{reviews.map(({ _id, content, author }) => (
 				<Review
 					key={_id}
 					content={content}
-					author={author.login}
-					reviewId={_reviewId}
+					author={author.login ?? author} //TODO refactor this
+					reviewId={_id}
 					hotelId={hotelId}
 				/>
 			))}
 
+			{/* only logged-in users can leave reviews  */}
 			{!isGuest && (
 				<div className={styles.newComment}>
 					<textarea
@@ -64,4 +60,5 @@ export const Reviews = ({ reviews, hotelId }) => {
 			)}
 		</div>
 	);
-};
+});
+// };

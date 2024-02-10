@@ -15,6 +15,6 @@
 	cursor: pointer;
 }
 
-.submitBtn:hover {
-	color: gray;
+.errorMessage {
+	color: var(--text-error-red);
 }

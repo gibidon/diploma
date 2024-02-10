@@ -11,3 +11,4 @@ export * from './bold-text/bold-text';
 export * from './mail-list/mail-list';
 export * from './editable-input/editable-input';
 export * from './layout-page/layout-page';
+export * from './tooltip/tooltip';

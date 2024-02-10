@@ -19,17 +19,18 @@
 	--background-light-gray: #83807c;
 	--background-dark-gray: #5a5754;
 	--background-green: rgb(14, 126, 14);
+	--text-bright-white: hsl(0, 0%, 100%);
+	--text-dark-gray: rgb(104, 101, 101);
 	--text-white: hsl(0, 48%, 94%);
+	--text-dim-white: hsl(0, 27%, 85%);
 	--text-dark: black;
 	--text-light-gray: rgb(158, 147, 147);
 	--text-error-red: rgb(209, 25, 25);
-
 	--btn-orange: rgb(236, 181, 29);
 	--btn-green: rgb(50, 167, 85);
 	--btn-red: rgb(241, 108, 31);
 	--btn-black: rgb(7, 7, 6);
 	--btn-blue: #003b95;
 	--btn-light-blue: #386ebe;
-
 	--customPink: rgb(185, 38, 190);
 }

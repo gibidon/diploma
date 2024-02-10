@@ -2,12 +2,10 @@ import { useState, useLayoutEffect } from 'react';
 import { saveHotelAsync, removeHotelAsync } from '#actions';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Input, EditableInput } from '#components';
+import { Input } from '#components';
 import { FiSave } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
 import styles from './hotel-form.module.css';
-
-// import { savePostAsync } from '../../../../actions';
 
 const emptyFormData = {
 	title: '',
@@ -19,27 +17,26 @@ const emptyFormData = {
 };
 
 export const HotelForm = ({
-	hotelData: { id, title, images, description, price, country, rating },
+	// hotel: { id, title, images, description, price, country, rating },
+	hotel,
 }) => {
-	console.log('rendering hotel form//');
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isCreating = useMatch('/hotel/create');
 
+	const { id, title, images, description, price, country, rating } = hotel;
+
 	const [formState, setFormState] = useState({
-		title,
-		description,
-		price,
-		country,
-		rating,
-		// images: images[0],
-		images,
+		...hotel,
+		// title,
+		// description,
+		// price,
+		// country,
+		// rating,
+		// images,
 	});
 
-	console.log('formState: ', formState);
-	// console.log('images: ', images);
-	// if we come from hotel-page to url /hotel/edit,form data is taken from hotel. Otherwise we clean the form in useLayoutEffect:
+	// if we come to url /hotel/edit,form data is taken from hotel(redux store). Otherwise we clean the form in useLayoutEffect:
 	useLayoutEffect(() => {
 		if (!id) setFormState(emptyFormData);
 	}, [id]);
@@ -47,7 +44,6 @@ export const HotelForm = ({
 	const onSave = () => {
 		dispatch(saveHotelAsync(id, formState)).then(({ id }) => {
 			navigate(`/hotel/${id}`);
-			// navigate('/');
 		});
 	};
 
@@ -67,8 +63,6 @@ export const HotelForm = ({
 	};
 
 	const deleteImageInForm = (index) => {
-		console.log(index);
-
 		setFormState({
 			...formState,
 			images: formState.images.toSpliced(index, 1),
@@ -77,10 +71,13 @@ export const HotelForm = ({
 
 	return (
 		<form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-			<h1>Данные отеля:</h1>
+			{/* <form className={styles.form}> */}
+			<h1>{isCreating ? 'Создание' : 'Данные'} отеля</h1>
+
 			<div>
 				<Input
 					name="title"
+					id={'title'}
 					value={formState.title}
 					placeholder="Название отеля.."
 					onChange={onChange}
@@ -157,6 +154,8 @@ export const HotelForm = ({
 			<button className={styles.saveBtn} onClick={onSave}>
 				<FiSave size="21px" margin="0 10px 0 0" />
 			</button>
+
+			{/* if not a creation mode,show delete button */}
 			{!isCreating && (
 				<button className={styles.deleteBtn} onClick={onDelete}>
 					<MdDeleteOutline size="21px" margin="0 10px 0 0" />

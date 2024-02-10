@@ -2,42 +2,46 @@ import { useState, useEffect } from 'react';
 import { BoldText, Loader, Dropdown, PrivateContent } from '#components';
 import { useSelector } from 'react-redux';
 import { ROLES } from '#constants';
-import { useApi, useLoading } from '#hooks';
+import { useLoading } from '#hooks';
 import { selectUserRole } from '#selectors';
 import { checkAccess, request } from '#utils';
-import styles from './admin-page.module.css';
+import { HotelForm } from '../hotel/components/hotel-form/hotel-form';
+import styles from './admin-page.module.scss';
 
 export const AdminPage = () => {
+	console.log('rendering admin page');
+
 	const [users, setUsers] = useState([]);
 	const [hotels, setHotels] = useState([]);
-	// const [reservations, setReservations] = useState([]);
-	const [shouldUpdateData, setShouldUpdateData] = useState(false);
-	const userRole = useSelector(selectUserRole);
+	const [shouldUpdatePage, setShouldUpdatePage] = useState(false);
 	const { loading, setLoading } = useLoading();
-
-	console.log('uh', users, hotels);
+	const userRole = useSelector(selectUserRole);
 
 	useEffect(() => {
 		if (!checkAccess([ROLES.ADMIN], userRole)) {
 			return;
 		}
 		setLoading(true);
-		Promise.all([
-			request('/users'),
-			request('/hotels'),
-			// request('/reservations'),
-		]).then(([{ users }, { hotels }]) => {
-			setUsers(users);
-			setHotels(hotels);
-			// setReservations(reservations);
-			setLoading(false);
-		});
-	}, [shouldUpdateData, setLoading, userRole]);
+
+		Promise.all([request('/users'), request('/hotels?limit=30')]).then(
+			([{ users }, { hotels }]) => {
+				setUsers(users);
+				setHotels(hotels);
+				setLoading(false);
+			},
+		);
+	}, [shouldUpdatePage, setLoading, userRole]);
 
 	const deleteUser = (id) => {
 		request(`/users/${id}`, 'DELETE').then(
-			setShouldUpdateData(!shouldUpdateData),
+			setShouldUpdatePage(!shouldUpdatePage),
 			// TODO delete user's bookings and reviews
+		);
+	};
+
+	const deleteHotel = async (id) => {
+		request(`/hotels/${id}`, 'DELETE').then(() =>
+			setShouldUpdatePage(!shouldUpdatePage),
 		);
 	};
 
@@ -53,12 +57,12 @@ export const AdminPage = () => {
 					<div className={styles.user} key={index}>
 						<BoldText>User login : {login} </BoldText>
 						<Dropdown openBtnText={'More info'} closeBtnText={'Hide'}>
-							<div>id: {id}</div>
+							<div>Id: {id}</div>
 							<div>Login: {login}</div>
 							<div>
 								Reservations:
-								{reservations.map((reservation, index) => (
-									<div key={index}>{reservation}</div>
+								{reservations.map((reservation) => (
+									<div key={reservation}>{reservation}</div>
 								))}
 							</div>
 							<div>
@@ -71,82 +75,16 @@ export const AdminPage = () => {
 			<div className={styles.hotelList}>
 				<h2>Hotel list:</h2>
 
-				{hotels.map(({ id, title }) => (
-					<div>
-						Id:{id},title:{title}
+				{hotels.map((hotel, index) => (
+					<div className={styles.hotel}>
+						<div>Hotel №{index}</div>
+
+						<Dropdown openBtnText={'more info'} closeBtnText={'hide'}>
+							<HotelForm hotel={hotel} />
+						</Dropdown>
 					</div>
 				))}
 			</div>
-			{/* <div className={styles.reservations}> */}
-			{/* {reservations.map((reservation) => (
-					<div>reservation.id</div>
-				))} */}
-			{/* </div> */}
 		</PrivateContent>
 	);
 };
-
-// Promise.all([request('/users'), request('/users/roles')]).then(([usersRes, rolesRes]) => {
-// 		if (usersRes.error || rolesRes.error) {
-// 			setErrorMessage(usersRes.error || rolesRes.error);
-// 			return;
-// 		}
-
-// 		setUsers(usersRes.data);
-// 		setRoles(rolesRes.data);
-// 	});
-// }, [shouldUpdateUserList, userRole]);
-
-// -------------------------------------------------------
-
-// useEffect(() => {
-// 		if (!checkAccess([ROLE.ADMIN], userRole)) {
-// 			return;
-// 		}
-
-// 		Promise.all([request('/users'), request('/users/roles')]).then(([usersRes, rolesRes]) => {
-// 			if (usersRes.error || rolesRes.error) {
-// 				setErrorMessage(usersRes.error || rolesRes.error);
-// 				return;
-// 			}
-
-// 			setUsers(usersRes.data);
-// 			setRoles(rolesRes.data);
-// 		});
-// 	}, [shouldUpdateUserList, userRole]);
-
-// 	const onUserRemove = (userId) => {
-// 		if (!checkAccess([ROLE.ADMIN], userRole)) {
-// 			return;
-// 		}
-
-// 		request(`/users/${userId}`, 'DELETE').then(setShouldUpdateUserList(!shouldUpdateUserList));
-// 	};
-
-// 	return (
-// 		<PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
-// 			<div className={className}>
-// 				<H2> Пользователи</H2>
-// 				<div>
-// 					<TableRow>
-// 						<div className="login-column">Логин</div>
-// 						<div className="registered-at-column">Дата регистрации</div>
-// 						<div className="role-column">Роль</div>
-// 					</TableRow>
-
-// 					{users.map(({ id, login, registeredAt, roleId }) => (
-// 						<UserRow
-// 							key={id}
-// 							id={id}
-// 							login={login}
-// 							registeredAt={registeredAt}
-// 							roleId={roleId}
-// 							roles={roles.filter(({ id: roleId }) => roleId !== ROLE.GUEST)}
-// 							onUserRemove={() => onUserRemove(id)}
-// 						/>
-// 					))}
-// 				</div>
-// 			</div>
-// 		</PrivateContent>
-// 	);
-// };

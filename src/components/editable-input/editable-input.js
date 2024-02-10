@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import styles from './editable-input.css';
+import styles from './editable-input.scss';
 
 export const EditableInput = ({ id, label, value, ...props }) => {
 	const [editMode, setEditMode] = useState(false);

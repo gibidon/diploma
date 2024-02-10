@@ -7,14 +7,14 @@ import { PrivateContent } from '#components';
 import { Slider } from '../slider/Slider';
 import { Reviews } from '../reviews/Reviews';
 import { BookingForm } from '../booking-form/booking-form';
-import { CiEdit } from 'react-icons/ci';
 import { request } from '#utils';
 import styles from './hotel-content.module.css';
 
 export const HotelContent = ({ hotelData }) => {
-	const [showBookingForm, setShowBookingForm] = useState(false);
+	console.log('rendering hotel content..');
+	const [showReservationForm, setShowReservationForm] = useState(false);
 	const [error, setError] = useState('');
-	const formRef = useRef(null);
+	const formRef = useRef('');
 
 	const {
 		id: hotelId,
@@ -32,25 +32,21 @@ export const HotelContent = ({ hotelData }) => {
 	const isLogged = userRole !== ROLES.GUEST;
 	const isAdmin = userRole === ROLES.ADMIN;
 
-	const submitForm = async (formData) => {
+	const submitReservationForm = async (formData) => {
 		//TODO change user and hotel to userId and hotel,difference with DB storing
 		try {
-			const { data, error } = await request(
-				`/users/${userId}/reservations`,
-				'POST',
-				{
-					...formData,
-					user: userId,
-					hotel: hotelId,
-				},
-			);
+			const { error } = await request(`/users/${userId}/reservations`, 'POST', {
+				...formData,
+				user: userId,
+				hotel: hotelId,
+			});
 
 			if (error) setError(error);
 		} catch (error) {
 			throw new Error('Something wrong happened when submitting form..');
 		}
 
-		setShowBookingForm(!showBookingForm);
+		setShowReservationForm(!showReservationForm);
 	};
 
 	return (
@@ -71,7 +67,6 @@ export const HotelContent = ({ hotelData }) => {
 						<PrivateContent accessRoles={[ROLES.ADMIN]}>
 							<Link to={`/hotel/${hotelId}/edit`}>
 								<span className={styles.editPanel}>Edit hotel</span>
-								{/* <CiEdit /> */}
 							</Link>
 						</PrivateContent>
 					)}
@@ -91,7 +86,7 @@ export const HotelContent = ({ hotelData }) => {
 						className={isLogged ? styles.bookBtn : styles.bookBtnDisabled}
 						disabled={!isLogged}
 						onClick={() => {
-							setShowBookingForm(!showBookingForm);
+							setShowReservationForm(!showReservationForm);
 							formRef.current?.scrollIntoView({ behavior: 'smooth' });
 							setError('');
 						}}
@@ -105,10 +100,10 @@ export const HotelContent = ({ hotelData }) => {
 			</div>
 
 			<div ref={formRef}>
-				{showBookingForm && (
+				{showReservationForm && (
 					<BookingForm
-						submitForm={submitForm}
-						cancelForm={() => setShowBookingForm(!showBookingForm)}
+						submitForm={submitReservationForm}
+						cancelForm={() => setShowReservationForm(!showReservationForm)}
 					/>
 				)}
 			</div>

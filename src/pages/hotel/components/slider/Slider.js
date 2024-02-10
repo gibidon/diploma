@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { TbArrowBigLeft, TbArrowBigRight } from 'react-icons/tb';
-
-import styles from './slider.module.css';
+import styles from './slider.module.scss';
 
 export const Slider = ({ images }) => {
 	const [imageIndex, setImageIndex] = useState(0);
@@ -22,14 +21,6 @@ export const Slider = ({ images }) => {
 		<div className={styles.slider}>
 			<div className={styles.sliderImage}>
 				<img src={images[imageIndex]} alt={'img'} />
-				{/* {images.map((imageUrl, index) => (
-					<img
-						key={index}
-						src={images[index]}
-						style={{ translate: `${-100 * index} %` }}
-						alt={imageUrl}
-					/>
-				))} */}
 			</div>
 
 			<button

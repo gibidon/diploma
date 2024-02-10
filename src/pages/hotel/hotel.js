@@ -9,12 +9,16 @@ import { HotelForm, HotelContent } from './components';
 import { Loader, PrivateContent } from '#components';
 
 export const Hotel = () => {
+	console.log('rendering hotel page..');
+
 	const [error, setError] = useState(null);
 	const { loading, setLoading } = useLoading();
 
 	const params = useParams();
 	const dispatch = useDispatch();
 	const hotel = useSelector(selectHotel);
+
+	console.log('hotel', hotel);
 
 	const isCreating = useMatch('/hotel/create');
 	const isEditing = useMatch(`/hotel/${params.id}/edit`);
@@ -42,19 +46,18 @@ export const Hotel = () => {
 	// const hotel = data?.hotel;
 	// console.log(hotel);
 
-	if (loading) return <Loader />;
-
 	const SpecificHotelPage =
 		isEditing || isCreating ? (
 			<PrivateContent accessRoles={[ROLES.ADMIN]} serverError={error}>
 				{/* <HotelForm hotelData={hotel} /> */}
-				<HotelForm hotelData={hotel} />
+				<HotelForm hotel={hotel} />
 			</PrivateContent>
 		) : (
 			// <HotelContent hotelData={hotel} />
 			<HotelContent hotelData={hotel} />
 		);
-	//TODO comments error upon creation
+
+	if (loading) return <Loader />;
 
 	return error ? <div>Error: {error} </div> : SpecificHotelPage;
 };

@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { request } from '#utils';
 import { useLoading } from '#hooks';
 import { EditableInput, Loader } from '#components';
-
-import styles from './booking-template.module.css';
+import styles from './booking-template.module.scss';
 
 export const BookingTemplate = ({
 	id,
@@ -23,7 +22,6 @@ export const BookingTemplate = ({
 		hotel,
 	});
 
-	console.log('formState : ', formState);
 	const { loading, setLoading } = useLoading();
 
 	const onChange = ({ target }) =>

@@ -1,4 +1,4 @@
-import styles from './toggle-switch.module.css';
+import styles from './toggle-switch.module.scss';
 
 export const ToggleSwitch = ({ toggleTheme }) => {
 	return (

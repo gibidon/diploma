@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROLES } from '#constants';
 import { selectUserRole, selectUserLogin, selectUserId } from '#selectors';
+import { ToolTip } from '#components';
 import { logout } from '#actions';
 import { checkAccess } from '#utils';
 import { FaUser } from 'react-icons/fa';
@@ -10,7 +11,7 @@ import { IoLogOutOutline } from 'react-icons/io5';
 import { TbPlayerSkipBackFilled } from 'react-icons/tb';
 import { BsSuitcase2 } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa6';
-import styles from './control-panel.module.css';
+import styles from './control-panel.module.scss';
 
 export const ControlPanel = () => {
 	const roleId = useSelector(selectUserRole);
@@ -31,11 +32,14 @@ export const ControlPanel = () => {
 			{roleId === ROLES.GUEST ? (
 				<span className={styles.highlight}>
 					<Link to="/login" className={styles.link}>
-						<FaUser className={styles.loginIcon} />
+						<ToolTip text={'Login'}>
+							<FaUser className={styles.loginIcon} />
+						</ToolTip>
 					</Link>
 				</span>
 			) : (
-				<>
+				// </span>
+				<div className={styles.panel}>
 					<div className={styles.userName}>Hello, {login}</div>
 
 					<IoLogOutOutline
@@ -43,14 +47,16 @@ export const ControlPanel = () => {
 						onClick={onLogout}
 						style={{ color: 'white', fontSize: '24px', cursor: 'pointer' }}
 					/>
-				</>
+				</div>
 			)}
+
 			<TbPlayerSkipBackFilled
 				style={{ cursor: 'pointer' }}
 				onClick={() => {
 					navigate(-1);
 				}}
 			/>
+
 			{roleId !== ROLES.GUEST && (
 				<Link to={`/user/${userId}`}>
 					<BsSuitcase2

@@ -45,16 +45,11 @@ form {
 	cursor: pointer;
 }
 
-.submitBtn:hover {
-	color: var(--text-light-gray);
-}
-
 label {
 	font-weight: 600;
 }
 
 .errorMessage {
-	/* font-size: 18px; */
 	font-weight: 600;
 	color: rgb(158, 11, 11);
 }

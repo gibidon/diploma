@@ -2,15 +2,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeReviewAsync, openModal, CLOSE_MODAL } from '#actions';
 import { selectUserRole } from '#selectors';
 import { ROLES } from '#constants';
-import styles from './review.module.css';
+import { useThemeContext } from '#hooks';
+import styles from './review.module.scss';
 
 export const Review = ({ content, author, hotelId, reviewId }) => {
+	console.log('hr', hotelId, reviewId);
 	const dispatch = useDispatch();
 	const userRole = useSelector(selectUserRole);
+	const { theme } = useThemeContext();
 
 	const isAdmin = [ROLES.ADMIN].includes(userRole);
 
-	const onDeleteReview = (reviewId) => {
+	const onDeleteReview = () => {
 		dispatch(
 			openModal({
 				text: 'Удалить отзыв?',
@@ -26,12 +29,10 @@ export const Review = ({ content, author, hotelId, reviewId }) => {
 	};
 
 	return (
-		<div className={styles.review}>
+		<div className={theme === 'light' ? styles.review : styles.reviewDark}>
 			<div className={styles.content}>{content}</div>
 			<div className={styles.author}> Author: {author}</div>
-			{isAdmin && (
-				<button onClick={() => onDeleteReview(reviewId)}>Delete</button>
-			)}
+			{isAdmin && <button onClick={onDeleteReview}>Delete</button>}
 		</div>
 	);
 };

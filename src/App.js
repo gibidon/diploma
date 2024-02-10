@@ -13,6 +13,7 @@ import {
 import { Header, Footer, LayoutPage, MailList, Modal } from '#components';
 import { AdminPage } from '#pages/admin-page/admin-page';
 import './App.css';
+import './styles/_mixins.scss';
 
 export const App = () => {
 	const dispatch = useDispatch();

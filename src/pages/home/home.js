@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
 	useDebouncedFunction,
 	useDownloadHotels,
@@ -8,7 +8,7 @@ import {
 import { HotelCard, SearchColumn } from './components';
 import { DEBOUNCE_DELAY, PAGINATION_LIMIT } from '#constants';
 import { BoldText, Loader } from '#components';
-import styles from './home.module.css';
+import styles from './home.module.scss';
 
 const initialSearchParams = {
 	searchPhrase: '',
@@ -21,10 +21,11 @@ const initialSearchParams = {
 };
 
 export const Home = () => {
+	console.log('rendering home page..');
 	// const [hotels, setHotels] = useState([]);
 	const [searchParams, setSearchParams] = useState(initialSearchParams);
 
-	console.log('sp', searchParams);
+	// console.log('sp', searchParams);
 
 	const { loading, setLoading } = useLoading();
 
@@ -95,9 +96,6 @@ export const Home = () => {
 	// 	});
 	// };
 
-	const cleanSearchParams = () => {
-		setSearchParams(initialSearchParams);
-	};
 	// if (loading) return <Loader />;
 
 	return (
@@ -109,7 +107,6 @@ export const Home = () => {
 					min={min}
 					max={max}
 					onChange={onChange}
-					cleanSearchParams={cleanSearchParams}
 				/>
 				<div className={styles.content}>
 					{loading && <Loader />}
